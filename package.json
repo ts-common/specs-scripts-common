@@ -1,0 +1,27 @@
+{
+  "name": "specs-scripts-common",
+  "version": "1.0.0",
+  "description": "Common lib for azure swagger specs validation scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ts-common/specs-scripts-common.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ts-common/specs-scripts-common/issues"
+  },
+  "homepage": "https://github.com/ts-common/specs-scripts-common#readme",
+  "devDependencies": {
+    "@types/jest": "^25.1.4",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {}
+}
