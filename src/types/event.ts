@@ -4,24 +4,24 @@ enum Stage {
   Completed = "Completed"
 }
 
-export type PipelineStage = {
+export type PipelineRun = {
   buildId: string;
   pipelineBuildId: string;
   pipelineTaskId: string;
 };
 
-export enum PipelineResult {
+export enum TaskResult {
   Success = "Success",
   Failure = "Failure",
   TimedOut = "TimedOut"
 }
 
-export type PipelineInProgress = PipelineStage & {
+export type InProgressTask = PipelineRun & {
   stage: Stage.InProgress;
 };
 
-export type PipelineCompletion = PipelineStage & {
+export type CompletedTask = PipelineRun & {
   stage: Stage.Completed;
-  result: PipelineResult;
+  result: TaskResult;
   logPath: string;
 };
