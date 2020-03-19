@@ -1,8 +1,6 @@
-enum Stage {
-  Queued = "Queued",
-  InProgress = "InProgress",
-  Completed = "Completed"
-}
+type Stage = "Queued" | "InProgress" | "Completed";
+
+type Result = "Success" | "Failure" | "TimedOut";
 
 export type PipelineRun = {
   buildId: string;
@@ -10,18 +8,12 @@ export type PipelineRun = {
   pipelineTaskId: string;
 };
 
-export enum TaskResult {
-  Success = "Success",
-  Failure = "Failure",
-  TimedOut = "TimedOut"
-}
-
 export type InProgressTask = PipelineRun & {
-  stage: Stage.InProgress;
+  stage: "InProgress";
 };
 
 export type CompletedTask = PipelineRun & {
-  stage: Stage.Completed;
-  result: TaskResult;
+  stage: "Completed";
+  result: Result;
   logPath: string;
 };

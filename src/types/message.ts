@@ -1,16 +1,7 @@
-export enum MessageType {
-  Result = "Result",
-  Raw = "Raw"
-}
-
-export enum MessageLevel {
-  Info = "Info",
-  Warning = "Warning",
-  Error = "Error"
-}
+export type MessageLevel = "Info" | "Warning" | "Error";
 
 export type JsonPath = {
-  tag: string;
+  tag: string; // meta info about the path, e.g. "swagger" or "example"
   path: string;
 };
 
@@ -32,16 +23,16 @@ export type ResultMessageRecord = BaseMessageRecord & {
   paths: JsonPath[];
 };
 
-export type RawMessageRecord = BaseMessageRecord & {};
+export type RawMessageRecord = BaseMessageRecord;
 
 export type RawMessage = {
-  type: MessageType;
+  type: "Raw";
   data: RawMessageRecord[];
 };
 
 export type ResultMessage = {
-  type: MessageType;
-  data: ResultMessage[];
+  type: "Result";
+  data: ResultMessageRecord[];
 };
 
 export type Message = ResultMessage | RawMessage;
