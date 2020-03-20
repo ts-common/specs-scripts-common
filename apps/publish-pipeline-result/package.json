@@ -1,0 +1,27 @@
+{
+  "name": "publish-pipeline-result",
+  "version": "1.0.0",
+  "description": "An tool for publish pipeline result",
+  "license": "MIT",
+  "scripts": {
+    "build": "gulp build",
+    "test": "jest",
+    "build-test": "npm run build && npm test",
+    "build-demo": "node_modules/.bin/my-build",
+    "my-bulk-command": "node_modules/.bin/my-bulk-command"
+  },
+  "dependencies": {
+    "swagger-validation-common": "^1.0.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "devDependencies": {
+    "build-toolchain": "^1.0.0",
+    "typescript": "3.7.5",
+    "@microsoft/node-library-build": "~6.4.6",
+    "jest": "~25.1.0",
+    "gulp": "~4.0.2",
+    "@microsoft/rush-stack-compiler-3.7": "~0.2.5",
+    "@rushstack/eslint-config": "~0.5.5",
+    "@types/node": "~13.9.2"
+  }
+}

@@ -1,0 +1,42 @@
+// DO NOT ADD COMMENTS IN THIS FILE.  They will be lost when the Rush tool resaves it.
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/approved-packages.schema.json",
+  "packages": [
+    {
+      "name": "@microsoft/node-library-build",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "@microsoft/rush-stack-compiler-3.7",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "@rushstack/eslint-config",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "build-toolchain",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "gulp",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "jest",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "my-controls",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "swagger-validation-common",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "whatwg-fetch",
+      "allowedCategories": [ "production" ]
+    }
+  ]
+}
