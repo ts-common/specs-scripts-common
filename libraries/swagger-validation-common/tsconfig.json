@@ -2,6 +2,6 @@
   "extends": "./node_modules/build-toolchain/tsconfig.json",
 
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node", "jest"]
   }
 }

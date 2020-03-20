@@ -15,6 +15,10 @@
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "@types/jest",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
       "name": "build-toolchain",
       "allowedCategories": [ "production" ]
     },
@@ -33,6 +37,10 @@
     {
       "name": "swagger-validation-common",
       "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "ts-jest",
+      "allowedCategories": [ "production", "tools" ]
     },
     {
       "name": "whatwg-fetch",
