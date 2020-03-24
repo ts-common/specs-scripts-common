@@ -64,4 +64,5 @@ common/temp/
 
 # Common toolchain intermediate files
 lib
+dist
 temp

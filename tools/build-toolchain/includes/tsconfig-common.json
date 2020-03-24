@@ -1,20 +1,16 @@
 {
-  "$schema": "http://json.schemastore.org/tsconfig",
-
+  "extends": "../node_modules/@microsoft/rush-stack-compiler-3.7/includes/tsconfig-node.json",
   "compilerOptions": {
     "outDir": "../../../lib",
 
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react",
     "declaration": true,
     "sourceMap": true,
     "inlineSources": true,
-    "experimentalDecorators": true,
-    "strictNullChecks": true,
-    "types": [
-    ],
+    "strict": true,
+    "types": [],
 
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
@@ -26,11 +22,6 @@
       "dom"
     ]
   },
-  "include": [
-    "../../../src/**/*.ts",
-  ],
-  "exclude": [
-    "../../../node_modules",
-    "../../../lib"
-  ]
+  "include": ["../../../src/**/*.ts"],
+  "exclude": ["../../../node_modules", "../../../lib"]
 }

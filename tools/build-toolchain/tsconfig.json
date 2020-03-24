@@ -13,11 +13,9 @@
     "types": ["node"],
 
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
     "lib": ["es5", "es2015.collection", "es2015.iterable", "es2015.promise"],
     "resolveJsonModule": true,
     "esModuleInterop": true
-  },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "lib"]
+  }
 }
