@@ -30,15 +30,13 @@ export class AzureBlobClient {
     }
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    console.log(`Uploading ${path} to ${blockBlobClient.url}`);
-    console.log(blockBlobClient.name);
+    const target = `https://${blockBlobClient.accountName}.blob.core.windows.net/${containerName}/${blobName}`;
+    console.log(`Uploading ${path} to ${target}`);
     const resp = await blockBlobClient.uploadFile(path);
     if (resp.errorCode) {
-      throw new Error(
-        `Failed to upload ${path} to container ${containerName}:${resp}`
-      );
+      throw new Error(`Failed to upload ${path}:${resp}`);
     }
 
-    return `https://${blockBlobClient.accountName}.blob.core.windows.net/${containerName}/${blobName}`;
+    return;
   }
 }

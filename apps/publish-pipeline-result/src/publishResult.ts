@@ -60,7 +60,7 @@ async function uploadLog(path: string, blobName: string): Promise<string> {
   }
 }
 
-export async function main(argv: ArgvType): Promise<void> {
+export async function main(argv: any): Promise<void> {
   console.log(argv);
   const prop = getBuildProperties();
   const event = {
@@ -99,45 +99,62 @@ export async function main(argv: ArgvType): Promise<void> {
 const statuses: ReadonlyArray<PipelineStatus> = ["InProgress", "Completed"];
 const results: ReadonlyArray<PipelineResult> = ["Success", "Failure"];
 
-const argv = yargs
-  .option("taskKey", {
-    alias: "k",
-    demandOption: true,
-    description: "pipeline job name"
-  })
-  .option("taskRunId", {
-    alias: "i",
-    demandOption: true,
-    description: "unified pipeline allocated unique task id"
-  })
-  .option("status", {
-    alias: "s",
-    choices: statuses,
-    demandOption: true,
-    description: "status of the pipeline task"
-  })
-  .option("result", {
-    alias: "r",
-    choices: results,
-    demandOption: false,
-    description: "result of the pipeline task"
-  })
-  .option("logPath", {
-    alias: "l",
-    type: "string",
-    description: "log path of the pipeline result",
-    demandOption: false
-  })
-  .check((data: any) => {
-    if (data.status == "Completed") {
-      return !!data.result;
-    }
-    return true;
-  }).argv;
+export type ArgumentInterface = {
+  [x: string]: unknown;
+  taskKey: string;
+  taskRunId: string;
+  status: PipelineStatus;
+  result: PipelineResult | undefined;
+  logPath: string | undefined;
+  _: string[];
+  $0: string;
+};
 
-type ArgvType = typeof argv;
+function getArgv(argv: string[]): ArgumentInterface {
+  return yargs
+    .option("taskKey", {
+      alias: "k",
+      demandOption: true,
+      type: "string",
+      description: "pipeline job name"
+    })
+    .option("taskRunId", {
+      alias: "i",
+      demandOption: true,
+      type: "string",
+      description: "unified pipeline allocated unique task id"
+    })
+    .option("status", {
+      alias: "s",
+      choices: statuses,
+      demandOption: true,
+      description: "status of the pipeline task"
+    })
+    .option("result", {
+      alias: "r",
+      choices: results,
+      demandOption: false,
+      description: "result of the pipeline task"
+    })
+    .option("logPath", {
+      alias: "l",
+      type: "string",
+      description: "log path of the pipeline result",
+      demandOption: false
+    })
+    .check((data: any) => {
+      if (data.status == "Completed") {
+        return !!data.result;
+      }
+      return true;
+    })
+    .parse(process.argv);
+}
 
-main(argv).catch(error => {
-  console.error("Error:", error);
-  process.exit(1);
-});
+if (require.main === module) {
+  const argv = getArgv(process.argv);
+  main(argv).catch(error => {
+    console.error("Error:", error);
+    process.exit(1);
+  });
+}

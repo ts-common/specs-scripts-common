@@ -8,8 +8,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "strict": true,
-    "types": [],
-
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
