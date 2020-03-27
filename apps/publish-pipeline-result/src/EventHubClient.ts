@@ -75,6 +75,8 @@ export class EventHubProducer {
   public async close() {
     try {
       await this.producer.close();
-    } catch {} // swallow the error
+    } catch (err) {
+      console.error("Error when closing client: ", err);
+    } // swallow the error
   }
 }
