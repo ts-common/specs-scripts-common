@@ -16,7 +16,9 @@
     "@azure/event-hubs": "~5.0.2",
     "@azure/storage-blob": "~12.1.1",
     "yargs": "~15.3.1",
-    "moment": "~2.24.0"
+    "moment": "~2.24.0",
+    "winston": "~3.2.1",
+    "logform": "~2.1.2"
   },
   "devDependencies": {
     "build-toolchain": "^1.0.0",
@@ -30,6 +32,7 @@
     "ts-jest": "~25.2.1",
     "@types/jest": "~25.1.4",
     "jest-config": "~25.1.0",
-    "@types/yargs": "~15.0.4"
+    "@types/yargs": "~15.0.4",
+    "@types/winston": "~2.4.4"
   }
 }

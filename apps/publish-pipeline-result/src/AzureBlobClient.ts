@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 import { BlobServiceClient } from "@azure/storage-blob";
+import { logger } from "./logger";
 
 export class AzureBlobClient {
   private blobServiceClient: BlobServiceClient;
@@ -31,12 +32,12 @@ export class AzureBlobClient {
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
     const target = `https://${blockBlobClient.accountName}.blob.core.windows.net/${containerName}/${blobName}`;
-    console.log(`Uploading ${path} to ${target}`);
+    logger.info(`Uploading ${path} to ${target}`);
     const resp = await blockBlobClient.uploadFile(path);
     if (resp.errorCode) {
       throw new Error(`Failed to upload ${path}:${resp}`);
     }
 
-    return;
+    return target;
   }
 }

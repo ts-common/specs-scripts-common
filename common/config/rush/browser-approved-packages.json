@@ -27,6 +27,10 @@
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "@types/winston",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "@types/yargs",
       "allowedCategories": [ "production" ]
     },
@@ -64,6 +68,10 @@
     },
     {
       "name": "whatwg-fetch",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "winston",
       "allowedCategories": [ "production" ]
     },
     {

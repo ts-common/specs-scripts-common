@@ -8,6 +8,7 @@ import {
   PipelineStatus
 } from "swagger-validation-common/lib/event";
 import * as yargs from "yargs";
+import { logger } from "./logger";
 import { AzureBlobClient } from "./AzureBlobClient";
 import { EventHubProducer } from "./EventHubClient";
 
@@ -44,7 +45,7 @@ async function publishEvent(event: PipelineEvent): Promise<void> {
     await producer.send([JSON.stringify(event)]);
     await producer.close();
   } catch (e) {
-    console.error("Failed to send pipeline result:", JSON.stringify(event), e);
+    logger.error("Failed to send pipeline result:", JSON.stringify(event), e);
     throw e;
   }
 }
@@ -55,20 +56,20 @@ async function uploadLog(path: string, blobName: string): Promise<string> {
     const uploadedUrl = await client.uploadLocal(path, blobName);
     return uploadedUrl;
   } catch (e) {
-    console.error("Failed to upload pipeline log:", path, e);
+    logger.error("Failed to upload pipeline log:", path, e);
     throw e;
   }
 }
 
 export async function main(argv: any): Promise<void> {
-  console.log(argv);
+  logger.info(argv);
   const prop = getBuildProperties();
   const event = {
     taskKey: argv.taskKey,
     taskRunId: argv.taskRunId,
     buildId: prop.buildId
   };
-  console.log(event);
+  logger.info(event);
   switch (argv.status) {
     case "InProgress":
       const inprogressEvent = {
@@ -154,7 +155,7 @@ function getArgv(argv: string[]): ArgumentInterface {
 if (require.main === module) {
   const argv = getArgv(process.argv);
   main(argv).catch(error => {
-    console.error("Error:", error);
+    logger.error("Error:", error);
     process.exit(1);
   });
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 import { EventHubProducerClient, CreateBatchOptions } from "@azure/event-hubs";
+import { logger } from "./logger";
 
 export class EventHubProducer {
   private producer: EventHubProducerClient;
@@ -10,7 +11,7 @@ export class EventHubProducer {
   }
 
   public async send(eventsToSend: string[], partitionKey?: string) {
-    console.log(`events to send: ${eventsToSend}`);
+    logger.info(`events to send: ${eventsToSend}`);
     try {
       const batchOptions: CreateBatchOptions = {};
       if (partitionKey) {
@@ -24,16 +25,16 @@ export class EventHubProducer {
       while (i < eventsToSend.length) {
         const isAdded = batch.tryAdd({ body: eventsToSend[i] });
         if (!isAdded) {
-          console.error(`Failed to add ${eventsToSend[i]}`);
+          logger.error(`Failed to add ${eventsToSend[i]}`);
         }
         if (isAdded) {
-          console.log(`Added eventsToSend[${i}] to the batch`);
+          logger.info(`Added eventsToSend[${i}] to the batch`);
           ++i;
           continue;
         }
 
         if (batch.count === 0) {
-          console.log(
+          logger.info(
             `Message was too large and can't be sent until it's made smaller. Skipping...`
           );
           ++i;
@@ -41,7 +42,7 @@ export class EventHubProducer {
         }
 
         // otherwise this just signals a good spot to send our batch
-        console.log(
+        logger.info(
           `Batch is full - sending ${batch.count} messages as a single batch.`
         );
         await this.producer.sendBatch(batch);
@@ -53,14 +54,14 @@ export class EventHubProducer {
 
       // send any remaining messages, if any.
       if (batch.count > 0) {
-        console.log(
+        logger.info(
           `Sending remaining ${batch.count} messages as a single batch.`
         );
         await this.producer.sendBatch(batch);
         numEventsSent += batch.count;
       }
 
-      console.log(`Sent ${numEventsSent} events`);
+      logger.info(`Sent ${numEventsSent} events`);
 
       if (numEventsSent !== eventsToSend.length) {
         throw new Error(
@@ -68,7 +69,7 @@ export class EventHubProducer {
         );
       }
     } catch (err) {
-      console.error("Error when creating & sending a batch of events: ", err);
+      logger.error("Error when creating & sending a batch of events: ", err);
     }
   }
 
@@ -76,7 +77,7 @@ export class EventHubProducer {
     try {
       await this.producer.close();
     } catch (err) {
-      console.error("Error when closing client: ", err);
+      logger.error("Error when closing client: ", err);
     } // swallow the error
   }
 }
