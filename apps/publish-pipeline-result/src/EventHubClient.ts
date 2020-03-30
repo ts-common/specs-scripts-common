@@ -2,10 +2,7 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 import { EventHubProducerClient, CreateBatchOptions } from "@azure/event-hubs";
-import { EventDataBatch } from "@azure/event-hubs/typings/event-hubs";
 import { logger } from "./logger";
-
-type HasNextBatch = boolean;
 
 export class EventHubProducer {
   private producer: EventHubProducerClient;
@@ -22,34 +19,32 @@ export class EventHubProducer {
     return await this.producer.createBatch(batchOptions);
   }
 
-  private getNextBatch(
-    events: string[],
-    partitionKey?: string
-  ): () => Promise<[HasNextBatch, EventDataBatch]> {
+  private async *getBatchIterator(events: string[], partitionKey?: string) {
     let toAddIndex = 0;
-    return async (): Promise<[HasNextBatch, EventDataBatch]> => {
-      const batch = await this.createBatch(partitionKey);
+    if (toAddIndex >= events.length) {
+      return;
+    }
+    const batch = await this.createBatch(partitionKey);
 
-      while (toAddIndex < events.length) {
-        const isAdded = batch.tryAdd({ body: events[toAddIndex] });
-        if (!isAdded) {
-          break;
-        }
-        logger.info(`Added events[${toAddIndex}] to the batch`);
-        ++toAddIndex;
+    while (toAddIndex < events.length) {
+      const success = batch.tryAdd({ body: events[toAddIndex] });
+      if (!success) {
+        // batch is full
+        break;
       }
-      return [toAddIndex < events.length, batch];
-    };
+      logger.info(`Added events[${toAddIndex}] to the batch`);
+      ++toAddIndex;
+    }
+    yield batch;
   }
 
   public async send(events: string[], partitionKey?: string) {
     logger.info(`events to send: ${events}`);
-    const getBatch = this.getNextBatch(events, partitionKey);
-    let hasNext = events.length > 0;
-    let nextBatch;
-    while (hasNext) {
-      [hasNext, nextBatch] = await getBatch();
-      await this.producer.sendBatch(nextBatch);
+    const batchIterator = this.getBatchIterator(events, partitionKey);
+    let next = await batchIterator.next();
+    while (!next.done) {
+      await this.producer.sendBatch(next.value);
+      next = await batchIterator.next();
     }
   }
 
