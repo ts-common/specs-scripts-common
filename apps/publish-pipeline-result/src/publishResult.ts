@@ -16,11 +16,9 @@ type BuildProperties = {
   buildId: string;
 };
 
-function getBuildProperties(): BuildProperties {
-  return {
-    buildId: process.env.BUILD_BUILD_ID
-  } as BuildProperties;
-}
+const getBuildProperties = (): BuildProperties => ({
+  buildId: process.env.BUILD_BUILD_ID || ""
+});
 
 async function getEventHubProduer(): Promise<EventHubProducer> {
   const connectionString = process.env["EVENTHUB_CONNECTION_STRING"] || "";

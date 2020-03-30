@@ -10,7 +10,11 @@ export class EventHubProducer {
     this.producer = new EventHubProducerClient(sasUrl);
   }
 
-  public async send(eventsToSend: string[], partitionKey?: string) {
+  public async send(
+    eventsToSend: string[],
+    partitionKey?: string,
+    throwOnError = false
+  ) {
     logger.info(`events to send: ${eventsToSend}`);
     try {
       const batchOptions: CreateBatchOptions = {};
@@ -24,19 +28,22 @@ export class EventHubProducer {
       let i = 0;
       while (i < eventsToSend.length) {
         const isAdded = batch.tryAdd({ body: eventsToSend[i] });
-        if (!isAdded) {
-          logger.error(`Failed to add ${eventsToSend[i]}`);
-        }
         if (isAdded) {
           logger.info(`Added eventsToSend[${i}] to the batch`);
           ++i;
           continue;
+        } else {
+          logger.warn(`Can not add ${eventsToSend[i]} to batch`);
         }
 
         if (batch.count === 0) {
           logger.info(
             `Message was too large and can't be sent until it's made smaller. Skipping...`
           );
+          if (throwOnError) {
+            throw new Error(`Failed to add ${eventsToSend[i]}`);
+          }
+
           ++i;
           continue;
         }
