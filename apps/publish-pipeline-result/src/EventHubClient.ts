@@ -2,7 +2,10 @@
 // Licensed under the MIT License. See License in the project root for license information.
 
 import { EventHubProducerClient, CreateBatchOptions } from "@azure/event-hubs";
+import { EventDataBatch } from "@azure/event-hubs/typings/event-hubs";
 import { logger } from "./logger";
+
+type HasNextBatch = boolean;
 
 export class EventHubProducer {
   private producer: EventHubProducerClient;
@@ -10,73 +13,43 @@ export class EventHubProducer {
     this.producer = new EventHubProducerClient(sasUrl);
   }
 
-  public async send(
-    eventsToSend: string[],
-    partitionKey?: string,
-    throwOnError = false
-  ) {
-    logger.info(`events to send: ${eventsToSend}`);
-    try {
-      const batchOptions: CreateBatchOptions = {};
-      if (partitionKey) {
-        batchOptions.partitionKey = partitionKey;
-      }
+  private async createBatch(partitionKey?: string) {
+    const batchOptions: CreateBatchOptions = {};
+    if (partitionKey) {
+      batchOptions.partitionKey = partitionKey;
+    }
 
-      let batch = await this.producer.createBatch(batchOptions);
-      let numEventsSent = 0;
+    return await this.producer.createBatch(batchOptions);
+  }
 
-      let i = 0;
-      while (i < eventsToSend.length) {
-        const isAdded = batch.tryAdd({ body: eventsToSend[i] });
-        if (isAdded) {
-          logger.info(`Added eventsToSend[${i}] to the batch`);
-          ++i;
-          continue;
-        } else {
-          logger.warn(`Can not add ${eventsToSend[i]} to batch`);
+  private getNextBatch(
+    events: string[],
+    partitionKey?: string
+  ): () => Promise<[HasNextBatch, EventDataBatch]> {
+    let toAddIndex = 0;
+    return async (): Promise<[HasNextBatch, EventDataBatch]> => {
+      const batch = await this.createBatch(partitionKey);
+
+      while (toAddIndex < events.length) {
+        const isAdded = batch.tryAdd({ body: events[toAddIndex] });
+        if (!isAdded) {
+          break;
         }
-
-        if (batch.count === 0) {
-          logger.info(
-            `Message was too large and can't be sent until it's made smaller. Skipping...`
-          );
-          if (throwOnError) {
-            throw new Error(`Failed to add ${eventsToSend[i]}`);
-          }
-
-          ++i;
-          continue;
-        }
-
-        // otherwise this just signals a good spot to send our batch
-        logger.info(
-          `Batch is full - sending ${batch.count} messages as a single batch.`
-        );
-        await this.producer.sendBatch(batch);
-        numEventsSent += batch.count;
-
-        // and create a new one to house the next set of messages
-        batch = await this.producer.createBatch(batchOptions);
+        logger.info(`Added events[${toAddIndex}] to the batch`);
+        ++toAddIndex;
       }
+      return [toAddIndex < events.length, batch];
+    };
+  }
 
-      // send any remaining messages, if any.
-      if (batch.count > 0) {
-        logger.info(
-          `Sending remaining ${batch.count} messages as a single batch.`
-        );
-        await this.producer.sendBatch(batch);
-        numEventsSent += batch.count;
-      }
-
-      logger.info(`Sent ${numEventsSent} events`);
-
-      if (numEventsSent !== eventsToSend.length) {
-        throw new Error(
-          `Not all messages were sent (${numEventsSent}/${eventsToSend.length})`
-        );
-      }
-    } catch (err) {
-      logger.error("Error when creating & sending a batch of events: ", err);
+  public async send(events: string[], partitionKey?: string) {
+    logger.info(`events to send: ${events}`);
+    const getBatch = this.getNextBatch(events, partitionKey);
+    let hasNext = events.length > 0;
+    let nextBatch;
+    while (hasNext) {
+      [hasNext, nextBatch] = await getBatch();
+      await this.producer.sendBatch(nextBatch);
     }
   }
 
