@@ -29,8 +29,15 @@ export class EventHubProducer {
     while (toAddIndex < events.length) {
       const success = batch.tryAdd({ body: events[toAddIndex] });
       if (!success) {
-        // batch is full
-        break;
+        if (batch.count > 0) {
+          // batch is full
+          break;
+        } else {
+          // none event in batch, maybe the event is too large
+          throw new Error(
+            `Failed to add ${JSON.stringify(events[toAddIndex])} to batch`
+          );
+        }
       }
       logger.info(`Added events[${toAddIndex}] to the batch`);
       ++toAddIndex;
@@ -43,6 +50,7 @@ export class EventHubProducer {
     const batchIterator = this.getBatchIterator(events, partitionKey);
     let next = await batchIterator.next();
     while (!next.done) {
+      logger.info(`Sending batch: ${JSON.stringify(next.value)}`);
       await this.producer.sendBatch(next.value);
       next = await batchIterator.next();
     }

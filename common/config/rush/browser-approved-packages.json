@@ -39,6 +39,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "convict",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "gulp",
       "allowedCategories": [ "production", "tools" ]
     },
@@ -49,6 +53,10 @@
     {
       "name": "jest-config",
       "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "logform",
+      "allowedCategories": [ "production" ]
     },
     {
       "name": "moment",

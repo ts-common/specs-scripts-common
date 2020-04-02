@@ -3,156 +3,102 @@
 import {
   CompletedEvent,
   InProgressEvent,
-  PipelineEvent,
-  PipelineResult,
-  PipelineStatus
+  PipelineEvent
 } from "swagger-validation-common/lib/event";
-import * as yargs from "yargs";
 import { logger } from "./logger";
+import { configSchema, PublishResultConfig } from "./config";
 import { AzureBlobClient } from "./AzureBlobClient";
 import { EventHubProducer } from "./EventHubClient";
 
-type BuildProperties = {
-  buildId: string;
-};
-
-const getBuildProperties = (): BuildProperties => ({
-  buildId: process.env.BUILD_BUILD_ID || ""
-});
-
-async function getEventHubProduer(): Promise<EventHubProducer> {
-  const connectionString = process.env["EVENTHUB_CONNECTION_STRING"] || "";
-  const producer = new EventHubProducer(connectionString);
-  return producer;
-}
-
-async function getAzureBlobClient(): Promise<AzureBlobClient> {
-  const sasURL = process.env["AZURE_BLOB_SAS_URL"] || "";
-  const containerName =
-    process.env["AZURE_BLOB_CONTAINER_NAME"] || "pipelinelogs";
-  if (!sasURL) {
-    throw new Error("Please specify AZURE_BLOB_SAS_URL");
+class ResultPublisher {
+  constructor(private config: PublishResultConfig) {}
+  async getEventHubProduer(): Promise<EventHubProducer> {
+    if (!this.config.eventHubConnectionString) {
+      throw new Error("Please specify event hub connection string");
+    }
+    const producer = new EventHubProducer(this.config.eventHubConnectionString);
+    return producer;
   }
-  const wrapper = new AzureBlobClient(sasURL, containerName);
-  return wrapper;
-}
 
-async function publishEvent(event: PipelineEvent): Promise<void> {
-  try {
-    const producer = await getEventHubProduer();
-    await producer.send([JSON.stringify(event)]);
-    await producer.close();
-  } catch (e) {
-    logger.error("Failed to send pipeline result:", JSON.stringify(event), e);
-    throw e;
+  async getAzureBlobClient(): Promise<AzureBlobClient> {
+    if (!this.config.azureBlobSasUrl) {
+      throw new Error("Please specify azure blob sas url");
+    }
+
+    if (!this.config.azureBlobContainerName) {
+      throw new Error("Please specify azure blob container name");
+    }
+
+    const wrapper = new AzureBlobClient(
+      this.config.azureBlobSasUrl,
+      this.config.azureBlobContainerName
+    );
+    return wrapper;
+  }
+
+  async publishEvent(event: PipelineEvent): Promise<void> {
+    try {
+      const producer = await this.getEventHubProduer();
+      await producer.send([JSON.stringify(event)]);
+      await producer.close();
+    } catch (e) {
+      logger.error("Failed to send pipeline result:", JSON.stringify(event), e);
+      throw e;
+    }
+  }
+
+  async uploadLog(path: string, blobName: string): Promise<string> {
+    try {
+      const client = await this.getAzureBlobClient();
+      const uploadedUrl = await client.uploadLocal(path, blobName);
+      return uploadedUrl;
+    } catch (e) {
+      logger.error("Failed to upload pipeline log:", path, e);
+      throw e;
+    }
   }
 }
-
-async function uploadLog(path: string, blobName: string): Promise<string> {
-  try {
-    const client = await getAzureBlobClient();
-    const uploadedUrl = await client.uploadLocal(path, blobName);
-    return uploadedUrl;
-  } catch (e) {
-    logger.error("Failed to upload pipeline log:", path, e);
-    throw e;
-  }
-}
-
-export async function main(argv: any): Promise<void> {
-  logger.info(argv);
-  const prop = getBuildProperties();
+export async function main(config: PublishResultConfig): Promise<void> {
+  const resultPublisher = new ResultPublisher(config);
+  logger.info(config);
   const event = {
-    taskKey: argv.taskKey,
-    taskRunId: argv.taskRunId,
-    buildId: prop.buildId
+    taskKey: config.taskKey,
+    taskRunId: config.taskRunId,
+    buildId: config.buildId
   };
   logger.info(event);
-  switch (argv.status) {
+  switch (config.status) {
     case "InProgress":
       const inprogressEvent = {
         ...event,
         status: "InProgress"
       } as InProgressEvent;
-      await publishEvent(inprogressEvent);
+      await resultPublisher.publishEvent(inprogressEvent);
       break;
     case "Completed":
       let logPath = "";
-      if (argv.logPath) {
-        logPath = await uploadLog(
-          argv.logPath,
-          `${argv.taskRunId}-${prop.buildId}/${argv.taskKey}-result.json`
+      if (config.logPath) {
+        logPath = await resultPublisher.uploadLog(
+          config.logPath,
+          `${config.taskRunId}-${config.buildId}/${config.taskKey}-result.json`
         );
       }
       const completionEvent = {
         ...event,
         status: "Completed",
-        result: argv.result,
+        result: config.result,
         logPath
       } as CompletedEvent;
-      await publishEvent(completionEvent);
+      await resultPublisher.publishEvent(completionEvent);
       break;
   }
 }
 
-const statuses: ReadonlyArray<PipelineStatus> = ["InProgress", "Completed"];
-const results: ReadonlyArray<PipelineResult> = ["Success", "Failure"];
-
-export type ArgumentInterface = {
-  [x: string]: unknown;
-  taskKey: string;
-  taskRunId: string;
-  status: PipelineStatus;
-  result: PipelineResult | undefined;
-  logPath: string | undefined;
-  _: string[];
-  $0: string;
-};
-
-function getArgv(argv: string[]): ArgumentInterface {
-  return yargs
-    .option("taskKey", {
-      alias: "k",
-      demandOption: true,
-      type: "string",
-      description: "pipeline job name"
-    })
-    .option("taskRunId", {
-      alias: "i",
-      demandOption: true,
-      type: "string",
-      description: "unified pipeline allocated unique task id"
-    })
-    .option("status", {
-      alias: "s",
-      choices: statuses,
-      demandOption: true,
-      description: "status of the pipeline task"
-    })
-    .option("result", {
-      alias: "r",
-      choices: results,
-      demandOption: false,
-      description: "result of the pipeline task"
-    })
-    .option("logPath", {
-      alias: "l",
-      type: "string",
-      description: "log path of the pipeline result",
-      demandOption: false
-    })
-    .check((data: any) => {
-      if (data.status == "Completed") {
-        return !!data.result;
-      }
-      return true;
-    })
-    .parse(process.argv);
-}
-
 if (require.main === module) {
-  const argv = getArgv(process.argv);
-  main(argv).catch(error => {
+  configSchema.load({});
+  configSchema.validate({ allowed: "strict" });
+  const config = configSchema.getProperties();
+  main(config).catch(error => {
     logger.error("Error:", error);
     process.exit(1);
   });

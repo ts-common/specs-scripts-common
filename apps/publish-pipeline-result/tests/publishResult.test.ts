@@ -1,6 +1,9 @@
 import * as pr from "../src/publishResult";
+import { PublishResultConfig } from "../dist/config";
 
 const sendBatch = jest.fn();
+
+jest.mock("convict");
 
 jest.mock("@azure/event-hubs", () => ({
   EventHubProducerClient: () => ({
@@ -8,7 +11,7 @@ jest.mock("@azure/event-hubs", () => ({
       tryAdd: () => true,
       count: 1
     }),
-    sendBatch: sendBatch,
+    sendBatch,
     close: jest.fn()
   })
 }));
@@ -27,29 +30,28 @@ jest.mock("@azure/storage-blob", () => ({
 }));
 
 describe("publishResult", () => {
-  beforeEach(() => {
-    process.env["BUILD_BUILD_ID"] = "123";
-    process.env["AZURE_BLOB_SAS_URL"] = "dummy";
-    process.env["EVENTHUB_CONNECTION_STRING="] = "dummy";
-  });
-
   it("should send in progress event", async () => {
-    const argv = {
+    const argv: PublishResultConfig = {
+      buildId: "1",
       taskKey: "LintDiff",
-      taskRunId: 12,
-      status: "InProgress"
-    } as any;
+      taskRunId: "12",
+      status: "InProgress",
+      eventHubConnectionString: "dummy"
+    };
     expect(pr.main(argv)).resolves.not.toThrow();
   });
 
   it("should send completed event", async () => {
-    const argv = {
+    const argv: PublishResultConfig = {
+      buildId: "",
       taskKey: "LintDiff",
-      taskRunId: 12,
+      taskRunId: "12",
       status: "Completed",
       result: "Failure",
-      logPath: "./package.json"
-    } as any;
+      logPath: "./package.json",
+      azureBlobSasUrl: "dummy",
+      eventHubConnectionString: "dummy"
+    };
     expect(pr.main(argv)).resolves.not.toThrow();
     expect(sendBatch).toHaveBeenCalled();
   });
