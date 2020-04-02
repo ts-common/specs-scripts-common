@@ -50,7 +50,7 @@ export class EventHubProducer {
     const batchIterator = this.getBatchIterator(events, partitionKey);
     let next = await batchIterator.next();
     while (!next.done) {
-      logger.info(`Sending batch: ${JSON.stringify(next.value)}`);
+      logger.info(`Sending batch: ${next.value}`);
       await this.producer.sendBatch(next.value);
       next = await batchIterator.next();
     }

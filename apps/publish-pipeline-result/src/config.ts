@@ -1,6 +1,3 @@
-// tslint:disable: object-literal-sort-keys
-// tslint:disable: max-line-length
-
 import convict from "convict";
 import {
   PipelineResult,
@@ -32,32 +29,38 @@ export const configSchema = convict<PublishResultConfig>({
   taskKey: {
     format: stringMustHaveLength,
     default: "",
-    doc: "pipeline job name"
+    doc: "pipeline job name",
+    arg: "taskKey"
   },
   taskRunId: {
     format: stringMustHaveLength,
     default: "",
-    doc: "unified pipeline allocated unique task id"
+    doc: "unified pipeline allocated unique task id",
+    arg: "taskRunId"
   },
   buildId: {
     format: stringMustHaveLength,
     default: "",
-    doc: "azure pipeline build id"
+    doc: "azure pipeline build id",
+    arg: "buildId"
   },
   status: {
     format: statuses,
     default: "Queued",
-    doc: "status of the pipeline task"
+    doc: "status of the pipeline task",
+    arg: "status"
   },
   result: {
     format: results,
     default: "Success",
-    doc: "result of the pipeline task"
+    doc: "result of the pipeline task",
+    arg: "result"
   },
   logPath: {
     format: String,
     default: "/tmp/log.json",
-    doc: "log path of the pipeline result"
+    doc: "log path of the pipeline result",
+    arg: "logPath"
   },
   azureBlobSasUrl: {
     format: String,
@@ -69,7 +72,8 @@ export const configSchema = convict<PublishResultConfig>({
   azureBlobContainerName: {
     format: stringMustHaveLength,
     default: "pipelinelogs",
-    doc: "azure blob container name"
+    doc: "azure blob container name",
+    arg: "azureBlobContainerName"
   },
   eventHubConnectionString: {
     format: String,
