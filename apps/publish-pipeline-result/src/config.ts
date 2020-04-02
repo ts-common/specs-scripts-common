@@ -1,8 +1,5 @@
-import convict from "convict";
-import {
-  PipelineResult,
-  PipelineStatus
-} from "swagger-validation-common/lib/event";
+import convict from 'convict';
+import { PipelineResult, PipelineStatus } from 'swagger-validation-common/lib/event';
 
 const statuses: ReadonlyArray<PipelineStatus> = ["InProgress", "Completed"];
 const results: ReadonlyArray<PipelineResult> = ["Success", "Failure"];
@@ -30,56 +27,56 @@ export const configSchema = convict<PublishResultConfig>({
     format: stringMustHaveLength,
     default: "",
     doc: "pipeline job name",
-    arg: "taskKey"
+    arg: "taskKey",
   },
   taskRunId: {
     format: stringMustHaveLength,
     default: "",
     doc: "unified pipeline allocated unique task id",
-    arg: "taskRunId"
+    arg: "taskRunId",
   },
   buildId: {
     format: stringMustHaveLength,
     default: "",
     doc: "azure pipeline build id",
-    arg: "buildId"
+    arg: "buildId",
   },
   status: {
     format: statuses,
     default: "Queued",
     doc: "status of the pipeline task",
-    arg: "status"
+    arg: "status",
   },
   result: {
     format: results,
     default: "Success",
     doc: "result of the pipeline task",
-    arg: "result"
+    arg: "result",
   },
   logPath: {
     format: String,
     default: "/tmp/log.json",
     doc: "log path of the pipeline result",
-    arg: "logPath"
+    arg: "logPath",
   },
   azureBlobSasUrl: {
     format: String,
     default: "",
     doc: "azure blob sas url for uploading pipeline step log",
     env: "AZURE_BLOB_SAS_URL",
-    sensitive: true
+    sensitive: true,
   },
   azureBlobContainerName: {
     format: stringMustHaveLength,
     default: "pipelinelogs",
     doc: "azure blob container name",
-    arg: "azureBlobContainerName"
+    arg: "azureBlobContainerName",
   },
   eventHubConnectionString: {
     format: String,
     default: "",
     doc: "event hub connection string for sending pipeline progress events",
     env: "EVENTHUB_CONNECTION_STRING",
-    sensitive: true
-  }
+    sensitive: true,
+  },
 });

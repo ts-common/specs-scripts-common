@@ -1,6 +1,6 @@
 {
   "name": "swagger-validation-common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common lib for swagger validation",
   "license": "MIT",
   "main": "lib/index.js",
@@ -8,6 +8,8 @@
   "scripts": {
     "build": "gulp build",
     "test": "jest",
+    "copy-package": "cp -rf package.json lib",
+    "dist": "npm run copy-package && cd lib && npm publish",
     "build-test": "npm run build && npm test"
   },
   "devDependencies": {
