@@ -3,14 +3,12 @@ export type PipelineResult = "Success" | "Failure" | "TimedOut";
 export type PipelineRun = {
   taskKey: string; // a unified pipeline task key, e.g. LintDiff, Semantic
   taskRunId: string; // a unique id unified pipeline assigned for each task
-  buildId?: string; // the id of the record for the completed azure pipeline build.
+  pipelineBuildId: string; // the id of the record for the completed azure pipeline build.
+  pipelineJobId: string; // the id of the record for the completed azure pipeline job.
+  pipelineTaskId: string; // the id of the record for the completed azure pipeline task.
 };
 
-export type PipelineStatus = "Queued" | "InProgress" | "Completed";
-
-export type QueuedEvent = PipelineRun & {
-  status: "Queued";
-};
+export type PipelineStatus = "InProgress" | "Completed";
 
 export type InProgressEvent = PipelineRun & {
   status: "InProgress";
@@ -22,4 +20,4 @@ export type CompletedEvent = PipelineRun & {
   logPath: string;
 };
 
-export type PipelineEvent = QueuedEvent | InProgressEvent | CompletedEvent;
+export type PipelineEvent = InProgressEvent | CompletedEvent;

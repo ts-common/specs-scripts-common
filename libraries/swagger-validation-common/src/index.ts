@@ -2,7 +2,6 @@ export {
   PipelineResult,
   PipelineRun,
   PipelineStatus,
-  QueuedEvent,
   InProgressEvent,
   CompletedEvent,
   PipelineEvent,

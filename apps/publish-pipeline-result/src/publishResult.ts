@@ -1,14 +1,12 @@
 #!/usr/bin/env node
+import { CompletedEvent, InProgressEvent, PipelineEvent } from 'swagger-validation-common/lib/event';
 
-import {
-  CompletedEvent,
-  InProgressEvent,
-  PipelineEvent
-} from "swagger-validation-common/lib/event";
-import { logger } from "./logger";
-import { configSchema, PublishResultConfig } from "./config";
-import { AzureBlobClient } from "./AzureBlobClient";
-import { EventHubProducer } from "./EventHubClient";
+import { PipelineRun } from '../../../libraries/swagger-validation-common/src/types/event';
+import { AzureBlobClient } from './AzureBlobClient';
+import { configSchema, PublishResultConfig } from './config';
+import { EventHubProducer } from './EventHubClient';
+import { logger } from './logger';
+
 
 class ResultPublisher {
   constructor(private config: PublishResultConfig) {}
@@ -61,10 +59,12 @@ class ResultPublisher {
 export async function main(config: PublishResultConfig): Promise<void> {
   const resultPublisher = new ResultPublisher(config);
   logger.info(config);
-  const event = {
+  const event: PipelineRun = {
     taskKey: config.taskKey,
     taskRunId: config.taskRunId,
-    buildId: config.buildId
+    pipelineBuildId: config.pipelineBuildId,
+    pipelineJobId: config.pipelineJobId,
+    pipelineTaskId: config.pipelineTaskId,
   };
   logger.info(event);
   switch (config.status) {
@@ -80,15 +80,15 @@ export async function main(config: PublishResultConfig): Promise<void> {
       if (config.logPath) {
         logPath = await resultPublisher.uploadLog(
           config.logPath,
-          `${config.taskRunId}-${config.buildId}/${config.taskKey}-result.json`
+          `${config.taskRunId}-${config.pipelineBuildId}/${config.taskKey}-result.json`
         );
       }
-      const completionEvent = {
+      const completionEvent: CompletedEvent = {
         ...event,
         status: "Completed",
-        result: config.result,
+        result: config.result!,
         logPath
-      } as CompletedEvent;
+      };
       await resultPublisher.publishEvent(completionEvent);
       break;
   }

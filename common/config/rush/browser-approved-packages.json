@@ -23,6 +23,10 @@
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "@types/convict",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "@types/jest",
       "allowedCategories": [ "production", "tools" ]
     },

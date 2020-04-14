@@ -12,7 +12,9 @@ const stringMustHaveLength = (value: string) => {
 
 export interface PublishResultConfig {
   taskKey: string;
-  buildId: string;
+  pipelineBuildId: string;
+  pipelineJobId: string;
+  pipelineTaskId: string;
   taskRunId: string;
   status: PipelineStatus;
   result?: PipelineResult;
@@ -35,11 +37,23 @@ export const configSchema = convict<PublishResultConfig>({
     doc: "unified pipeline allocated unique task id",
     arg: "taskRunId",
   },
-  buildId: {
+  pipelineBuildId: {
     format: stringMustHaveLength,
     default: "",
     doc: "azure pipeline build id",
-    arg: "buildId",
+    arg: "pipelineBuildId",
+  },
+  pipelineJobId: {
+    format: stringMustHaveLength,
+    default: "",
+    doc: "azure pipeline job id",
+    arg: "pipelineJobId",
+  },
+  pipelineTaskId: {
+    format: stringMustHaveLength,
+    default: "",
+    doc: "azure pipeline task id",
+    arg: "pipelineTaskId",
   },
   status: {
     format: statuses,
