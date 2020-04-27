@@ -32,12 +32,13 @@ jest.mock("@azure/storage-blob", () => ({
 describe("publishResult", () => {
   it("should send in progress event", async () => {
     const argv: PublishResultConfig = {
+      source:"GitHub",
       repoKey: "testorg/testspecrepo",
       pipelineBuildId: "1",
       pipelineJobId: "1",
       pipelineTaskId: "1",
-      taskKey: "LintDiff",
-      taskRunId: "12",
+      unifiedPipelineTaskKey: "LintDiff",
+      unifiedPipelineBuildId: "12",
       status: "InProgress",
       eventHubConnectionString: "dummy",
     };
@@ -46,12 +47,13 @@ describe("publishResult", () => {
 
   it("should send completed event", async () => {
     const argv: PublishResultConfig = {
+      source: "GitHub",
       repoKey: "testorg/testspecrepo",
       pipelineBuildId: "1",
       pipelineJobId: "1",
       pipelineTaskId: "1",
-      taskKey: "LintDiff",
-      taskRunId: "12",
+      unifiedPipelineTaskKey: "LintDiff",
+      unifiedPipelineBuildId: "12",
       status: "Completed",
       result: "Failure",
       logPath: "./package.json",

@@ -32,7 +32,7 @@ export class AzureBlobClient {
     }
 
     const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-    logger.info(`Uploading ${path} to ${blockBlobClient.url}`);
+    logger.info(`Uploading ${path} to ${containerName}/${blobName}`);
     const resp = await blockBlobClient.uploadFile(path);
     if (resp.errorCode) {
       throw new Error(`Failed to upload ${path}:${resp}`);

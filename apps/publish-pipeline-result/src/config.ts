@@ -1,8 +1,9 @@
 import convict from 'convict';
-import { PipelineResult, PipelineStatus } from 'swagger-validation-common/lib/event';
+import { PipelineResult, PipelineStatus, PipelineTriggerSource } from 'swagger-validation-common';
 
 const statuses: ReadonlyArray<PipelineStatus> = ["InProgress", "Completed"];
 const results: ReadonlyArray<PipelineResult> = ["Success", "Failure"];
+const sources: ReadonlyArray<PipelineTriggerSource> = ["GitHub", "OpenAPIHub"];
 
 const stringMustHaveLength = (value: string) => {
   if (value.length === 0) {
@@ -11,12 +12,13 @@ const stringMustHaveLength = (value: string) => {
 };
 
 export interface PublishResultConfig {
+  source: PipelineTriggerSource
   repoKey: string;
-  taskKey: string;
+  unifiedPipelineBuildId: string;
+  unifiedPipelineTaskKey: string;
   pipelineBuildId: string;
   pipelineJobId: string;
   pipelineTaskId: string;
-  taskRunId: string;
   status: PipelineStatus;
   result?: PipelineResult;
   logPath?: string;
@@ -26,23 +28,29 @@ export interface PublishResultConfig {
 }
 
 export const configSchema = convict<PublishResultConfig>({
+  source: {
+    format: sources,
+    default: "GitHub",
+    doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
+    arg: "source",
+  },
   repoKey: {
     format: stringMustHaveLength,
     default: "",
     doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
-    arg: "repo",
+    arg: "repoKey",
   },
-  taskKey: {
+  unifiedPipelineTaskKey: {
     format: stringMustHaveLength,
     default: "",
     doc: "pipeline job name",
-    arg: "taskKey",
+    arg: "unifiedPipelineTaskKey",
   },
-  taskRunId: {
+  unifiedPipelineBuildId: {
     format: stringMustHaveLength,
     default: "",
     doc: "unified pipeline allocated unique task id",
-    arg: "taskRunId",
+    arg: "unifiedPipelineBuildId",
   },
   pipelineBuildId: {
     format: stringMustHaveLength,
@@ -64,7 +72,7 @@ export const configSchema = convict<PublishResultConfig>({
   },
   status: {
     format: statuses,
-    default: "Queued",
+    default: "InProgress",
     doc: "status of the pipeline task",
     arg: "status",
   },

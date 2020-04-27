@@ -1,7 +1,9 @@
 export type PipelineResult = "Success" | "Failure" | "TimedOut";
 
+export type PipelineTriggerSource = "GitHub" | "OpenAPIHub";
+
 export type PipelineRun = {
-  source: "GitHub" | "OpenAPIHub"
+  source: PipelineTriggerSource;
   unifiedPipelineTaskKey: string; // a unified pipeline task key, e.g. LintDiff, Semantic
   unifiedPipelineBuildId: string; // a unique build id unified pipeline assigned for each completed pipeline build id
   pipelineBuildId: string; // the id of the record for the completed azure pipeline build.

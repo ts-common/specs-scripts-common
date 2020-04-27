@@ -1,4 +1,5 @@
 export {
+  PipelineTriggerSource,
   PipelineResult,
   PipelineRun,
   PipelineStatus,

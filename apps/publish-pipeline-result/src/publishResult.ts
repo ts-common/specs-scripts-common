@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { CompletedEvent, InProgressEvent, PipelineEvent } from 'swagger-validation-common/lib/event';
+import { CompletedEvent, InProgressEvent, PipelineEvent, PipelineRun } from 'swagger-validation-common';
 
-import { PipelineRun } from '../../../libraries/swagger-validation-common/src/types/event';
 import { AzureBlobClient } from './AzureBlobClient';
 import { configSchema, PublishResultConfig } from './config';
 import { EventHubProducer } from './EventHubClient';
@@ -34,10 +33,10 @@ class ResultPublisher {
     return wrapper;
   }
 
-  async publishEvent(event: PipelineEvent): Promise<void> {
+  async publishEvent(event: PipelineEvent, partitionKey?: string): Promise<void> {
     try {
       const producer = await this.getEventHubProduer();
-      await producer.send([JSON.stringify(event)]);
+      await producer.send([JSON.stringify(event)], partitionKey);
       await producer.close();
     } catch (e) {
       logger.error("Failed to send pipeline result:", JSON.stringify(event), e);
@@ -57,25 +56,25 @@ class ResultPublisher {
 }
 export async function main(config: PublishResultConfig): Promise<void> {
   const resultPublisher = new ResultPublisher(config);
-  logger.info(config);
   const event: PipelineRun = {
-    taskKey: config.taskKey,
-    taskRunId: config.taskRunId,
+    source: config.source,
+    unifiedPipelineTaskKey: config.unifiedPipelineTaskKey,
+    unifiedPipelineBuildId: config.unifiedPipelineBuildId,
     pipelineBuildId: config.pipelineBuildId,
     pipelineJobId: config.pipelineJobId,
     pipelineTaskId: config.pipelineTaskId,
   };
-  logger.info(event);
+  const partitionKey = `${config.repoKey}-${config.unifiedPipelineBuildId}`;
   switch (config.status) {
     case "InProgress":
       const inprogressEvent = {
         ...event,
         status: "InProgress"
       } as InProgressEvent;
-      await resultPublisher.publishEvent(inprogressEvent);
+      await resultPublisher.publishEvent(inprogressEvent, partitionKey);
       break;
     case "Completed":
-      let logPath = `${config.repoKey}/${config.taskRunId}/${config.pipelineBuildId}/${config.taskKey}.json`;
+      let logPath = `${config.repoKey}/${config.unifiedPipelineBuildId}/${config.pipelineBuildId}/${config.unifiedPipelineTaskKey}.json`;
       if (config.logPath) {
         await resultPublisher.uploadLog(
           config.logPath,
@@ -88,7 +87,7 @@ export async function main(config: PublishResultConfig): Promise<void> {
         result: config.result!,
         logPath
       };
-      await resultPublisher.publishEvent(completionEvent);
+      await resultPublisher.publishEvent(completionEvent, partitionKey);
       break;
   }
 }

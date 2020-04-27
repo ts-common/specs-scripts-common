@@ -1,8 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
+import { CreateBatchOptions, EventHubProducerClient } from '@azure/event-hubs';
 
-import { EventHubProducerClient, CreateBatchOptions } from "@azure/event-hubs";
-import { logger } from "./logger";
+import { logger } from './logger';
+
 
 export class EventHubProducer {
   private producer: EventHubProducerClient;
@@ -39,7 +40,6 @@ export class EventHubProducer {
           );
         }
       }
-      logger.info(`Added events[${toAddIndex}] to the batch`);
       ++toAddIndex;
     }
     yield batch;
@@ -50,10 +50,10 @@ export class EventHubProducer {
     const batchIterator = this.getBatchIterator(events, partitionKey);
     let next = await batchIterator.next();
     while (!next.done) {
-      logger.info(`Sending batch: ${next.value}`);
       await this.producer.sendBatch(next.value);
       next = await batchIterator.next();
     }
+    logger.info("Send events done");
   }
 
   public async close() {
