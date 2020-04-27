@@ -1,8 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License in the project root for license information.
+import { BlobServiceClient } from '@azure/storage-blob';
 
-import { BlobServiceClient } from "@azure/storage-blob";
-import { logger } from "./logger";
+import { logger } from './logger';
+
 
 export class AzureBlobClient {
   private blobServiceClient: BlobServiceClient;
@@ -17,7 +18,7 @@ export class AzureBlobClient {
     blobName: string,
     containerName: string = this.containerName,
     createContainer: boolean = true
-  ): Promise<string> {
+  ) {
     const containerClient = this.blobServiceClient.getContainerClient(
       containerName
     );
@@ -37,6 +38,6 @@ export class AzureBlobClient {
       throw new Error(`Failed to upload ${path}:${resp}`);
     }
 
-    return blockBlobClient.url;
+    return resp;
   }
 }

@@ -1,5 +1,5 @@
-import * as pr from "../src/publishResult";
-import { PublishResultConfig } from "../dist/config";
+import { PublishResultConfig } from '../src/config';
+import * as pr from '../src/publishResult';
 
 const sendBatch = jest.fn();
 
@@ -32,25 +32,32 @@ jest.mock("@azure/storage-blob", () => ({
 describe("publishResult", () => {
   it("should send in progress event", async () => {
     const argv: PublishResultConfig = {
-      buildId: "1",
+      repoKey: "testorg/testspecrepo",
+      pipelineBuildId: "1",
+      pipelineJobId: "1",
+      pipelineTaskId: "1",
       taskKey: "LintDiff",
       taskRunId: "12",
       status: "InProgress",
-      eventHubConnectionString: "dummy"
+      eventHubConnectionString: "dummy",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
   });
 
   it("should send completed event", async () => {
     const argv: PublishResultConfig = {
-      buildId: "",
+      repoKey: "testorg/testspecrepo",
+      pipelineBuildId: "1",
+      pipelineJobId: "1",
+      pipelineTaskId: "1",
       taskKey: "LintDiff",
       taskRunId: "12",
       status: "Completed",
       result: "Failure",
       logPath: "./package.json",
+      azureBlobContainerName: "containername",
       azureBlobSasUrl: "dummy",
-      eventHubConnectionString: "dummy"
+      eventHubConnectionString: "dummy",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
     expect(sendBatch).toHaveBeenCalled();

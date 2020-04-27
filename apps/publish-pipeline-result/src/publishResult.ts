@@ -45,11 +45,10 @@ class ResultPublisher {
     }
   }
 
-  async uploadLog(path: string, blobName: string): Promise<string> {
+  async uploadLog(path: string, blobName: string) {
     try {
       const client = await this.getAzureBlobClient();
-      const uploadedUrl = await client.uploadLocal(path, blobName);
-      return uploadedUrl;
+      await client.uploadLocal(path, blobName);
     } catch (e) {
       logger.error("Failed to upload pipeline log:", path, e);
       throw e;
@@ -76,11 +75,11 @@ export async function main(config: PublishResultConfig): Promise<void> {
       await resultPublisher.publishEvent(inprogressEvent);
       break;
     case "Completed":
-      let logPath = "";
+      let logPath = `${config.repoKey}/${config.taskRunId}/${config.pipelineBuildId}/${config.taskKey}.json`;
       if (config.logPath) {
-        logPath = await resultPublisher.uploadLog(
+        await resultPublisher.uploadLog(
           config.logPath,
-          `${config.taskRunId}-${config.pipelineBuildId}/${config.taskKey}-result.json`
+          logPath, 
         );
       }
       const completionEvent: CompletedEvent = {

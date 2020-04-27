@@ -11,6 +11,7 @@ const stringMustHaveLength = (value: string) => {
 };
 
 export interface PublishResultConfig {
+  repoKey: string;
   taskKey: string;
   pipelineBuildId: string;
   pipelineJobId: string;
@@ -25,6 +26,12 @@ export interface PublishResultConfig {
 }
 
 export const configSchema = convict<PublishResultConfig>({
+  repoKey: {
+    format: stringMustHaveLength,
+    default: "",
+    doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
+    arg: "repo",
+  },
   taskKey: {
     format: stringMustHaveLength,
     default: "",
