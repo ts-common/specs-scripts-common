@@ -1,11 +1,16 @@
 #!/usr/bin/env node
-import { CompletedEvent, InProgressEvent, PipelineEvent, PipelineRun } from 'swagger-validation-common';
+import {
+  CompletedEvent,
+  InProgressEvent,
+  PipelineEvent,
+  PipelineRun,
+} from "swagger-validation-common";
 
-import { AzureBlobClient } from './AzureBlobClient';
-import { configSchema, PublishResultConfig } from './config';
-import { EventHubProducer } from './EventHubClient';
-import { logger } from './logger';
-
+import { AzureBlobClient } from "./AzureBlobClient";
+import { configSchema, PublishResultConfig } from "./config";
+import { EventHubProducer } from "./EventHubClient";
+import { logger } from "./logger";
+import * as fs from "fs";
 
 class ResultPublisher {
   constructor(private config: PublishResultConfig) {}
@@ -33,7 +38,10 @@ class ResultPublisher {
     return wrapper;
   }
 
-  async publishEvent(event: PipelineEvent, partitionKey?: string): Promise<void> {
+  async publishEvent(
+    event: PipelineEvent,
+    partitionKey?: string
+  ): Promise<void> {
     try {
       const producer = await this.getEventHubProduer();
       await producer.send([JSON.stringify(event)], partitionKey);
@@ -64,28 +72,34 @@ export async function main(config: PublishResultConfig): Promise<void> {
     pipelineJobId: config.pipelineJobId,
     pipelineTaskId: config.pipelineTaskId,
   };
-  const partitionKey = `${config.repoKey}-${config.unifiedPipelineBuildId}`;
+  const partitionKey = config.unifiedPipelineBuildId;
   switch (config.status) {
-    case "InProgress":
+    case "in_progress":
       const inprogressEvent = {
         ...event,
-        status: "InProgress"
+        status: "in_progress",
       } as InProgressEvent;
       await resultPublisher.publishEvent(inprogressEvent, partitionKey);
       break;
-    case "Completed":
-      let logPath = `${config.repoKey}/${config.unifiedPipelineBuildId}/${config.pipelineBuildId}/${config.unifiedPipelineTaskKey}.json`;
+    case "completed":
+      let logPath = "";
       if (config.logPath) {
-        await resultPublisher.uploadLog(
-          config.logPath,
-          logPath, 
-        );
+        // if result is success, it may not have the pipeline log, it's fine
+        // otherwise, we should try to upload the pipeline log
+        if (config.result === "success" && !fs.existsSync(config.logPath)) {
+          logger.info(
+            `result is ${config.result} and ${config.logPath} not exists, skipped uploading to azure blob`
+          );
+        } else {
+          logPath = `${config.repoKey}/${config.unifiedPipelineBuildId}/${config.pipelineBuildId}/${config.unifiedPipelineTaskKey}.json`;
+          await resultPublisher.uploadLog(config.logPath, logPath);
+        }
       }
       const completionEvent: CompletedEvent = {
         ...event,
-        status: "Completed",
+        status: "completed",
         result: config.result!,
-        logPath
+        logPath,
       };
       await resultPublisher.publishEvent(completionEvent, partitionKey);
       break;
@@ -96,7 +110,7 @@ if (require.main === module) {
   configSchema.load({});
   configSchema.validate({ allowed: "strict" });
   const config = configSchema.getProperties();
-  main(config).catch(error => {
+  main(config).catch((error) => {
     logger.error("Error:", error);
     process.exit(1);
   });

@@ -1,6 +1,6 @@
-export type PipelineResult = "Success" | "Failure" | "TimedOut";
+export type PipelineResult = "success" | "failure" | "timed_out";
 
-export type PipelineTriggerSource = "GitHub" | "OpenAPIHub";
+export type PipelineTriggerSource = "github" | "openapi_hub";
 
 export type PipelineRun = {
   source: PipelineTriggerSource;
@@ -11,14 +11,14 @@ export type PipelineRun = {
   pipelineTaskId: string; // the id of the record for the completed azure pipeline task.
 };
 
-export type PipelineStatus = "InProgress" | "Completed";
+export type PipelineStatus = "queued" | "in_progress" | "completed";
 
 export type InProgressEvent = PipelineRun & {
-  status: "InProgress";
+  status: "in_progress";
 };
 
 export type CompletedEvent = PipelineRun & {
-  status: "Completed";
+  status: "completed";
   result: PipelineResult;
   logPath: string;
 };

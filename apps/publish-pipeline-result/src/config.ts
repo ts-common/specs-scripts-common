@@ -1,9 +1,9 @@
 import convict from 'convict';
 import { PipelineResult, PipelineStatus, PipelineTriggerSource } from 'swagger-validation-common';
 
-const statuses: ReadonlyArray<PipelineStatus> = ["InProgress", "Completed"];
-const results: ReadonlyArray<PipelineResult> = ["Success", "Failure"];
-const sources: ReadonlyArray<PipelineTriggerSource> = ["GitHub", "OpenAPIHub"];
+const statuses: ReadonlyArray<PipelineStatus> = ["in_progress", "completed"];
+const results: ReadonlyArray<PipelineResult> = ["success", "failure"];
+const sources: ReadonlyArray<PipelineTriggerSource> = ["github", "openapi_hub"];
 
 const stringMustHaveLength = (value: string) => {
   if (value.length === 0) {
@@ -30,8 +30,8 @@ export interface PublishResultConfig {
 export const configSchema = convict<PublishResultConfig>({
   source: {
     format: sources,
-    default: "GitHub",
-    doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
+    default: "github",
+    doc: "Source from which the pipeline is triggered",
     arg: "source",
   },
   repoKey: {
@@ -72,13 +72,13 @@ export const configSchema = convict<PublishResultConfig>({
   },
   status: {
     format: statuses,
-    default: "InProgress",
+    default: "in_progress",
     doc: "status of the pipeline task",
     arg: "status",
   },
   result: {
     format: results,
-    default: "Success",
+    default: "success",
     doc: "result of the pipeline task",
     arg: "result",
   },
