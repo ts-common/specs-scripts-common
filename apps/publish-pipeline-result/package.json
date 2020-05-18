@@ -4,7 +4,7 @@
   "description": "An tool for publish pipeline result",
   "license": "MIT",
   "scripts": {
-    "build": "gulp build",
+    "build": "gulp build && jest",
     "test": "jest",
     "build-test": "npm run build && npm test",
     "build-demo": "node_modules/.bin/my-build",
