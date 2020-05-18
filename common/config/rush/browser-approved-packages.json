@@ -59,6 +59,10 @@
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "jest-serializer",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
       "name": "logform",
       "allowedCategories": [ "production" ]
     },
@@ -69,6 +73,10 @@
     {
       "name": "my-controls",
       "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "sane",
+      "allowedCategories": [ "production", "tools" ]
     },
     {
       "name": "swagger-validation-common",

@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "build-toolchain": "^1.0.0",
-    "typescript": "3.9.2",
+    "typescript": "3.7.5",
     "@microsoft/node-library-build": "~6.4.13",
     "jest": "~26.0.1",
     "gulp": "~4.0.2",
@@ -35,6 +35,8 @@
     "jest-config": "~26.0.1",
     "@types/yargs": "~15.0.5",
     "@types/winston": "~2.4.4",
-    "@types/convict": "~5.2.1"
+    "@types/convict": "~5.2.1",
+    "sane": "~4.1.0",
+    "jest-serializer": "~26.0.0"
   }
 }

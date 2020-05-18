@@ -17,11 +17,13 @@ dependencies:
   gulp: 4.0.2
   jest: 26.0.1
   jest-config: 26.0.1
+  jest-serializer: 26.0.0
   logform: 2.1.2
   moment: 2.25.3
   rimraf: 3.0.2
+  sane: 4.1.0
   ts-jest: 26.0.0
-  typescript: 3.9.2
+  typescript: 3.7.5
   whatwg-fetch: 3.0.0
   winston: 3.2.1
   yargs: 15.3.1
@@ -295,9 +297,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-AoeIEJn8vt+d/6+PXDRPaksYhnlbMIiejioBZvvMQsOjW/JYK6k/0dKnvvP3EhK5GfMBWDPtrxRtegWdAcdq9Q==
+  /@babel/plugin-syntax-async-generators/7.8.4:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-tycmZxkGfZaxhMRbXlPXuVFpdWlXpir2W4AMhSJgRKzk/eDlIXOhb2LHWoLpDF7TEHylV5zNhykX6KAgHJmTNw==
   /@babel/plugin-syntax-async-generators/7.8.4/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-async-generators/7.8.4
@@ -305,9 +312,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-tycmZxkGfZaxhMRbXlPXuVFpdWlXpir2W4AMhSJgRKzk/eDlIXOhb2LHWoLpDF7TEHylV5zNhykX6KAgHJmTNw==
+  /@babel/plugin-syntax-bigint/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-wnTnFlG+YxQm3vDxpGE57Pj0srRU4sHE/mDkt1qv2YJJSeUAec2ma4WLUnUPeKjyrfntVwe/N6dCXpU+zL3Npg==
   /@babel/plugin-syntax-bigint/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-bigint/7.8.3
@@ -315,9 +327,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-wnTnFlG+YxQm3vDxpGE57Pj0srRU4sHE/mDkt1qv2YJJSeUAec2ma4WLUnUPeKjyrfntVwe/N6dCXpU+zL3Npg==
+  /@babel/plugin-syntax-class-properties/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-UcAyQWg2bAN647Q+O811tG9MrJ38Z10jjhQdKNAL8fsyPzE3cCN/uT+f55cFVY4aGO4jqJAvmqsuY3GQDwAoXg==
   /@babel/plugin-syntax-class-properties/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-class-properties/7.8.3
@@ -325,9 +342,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-UcAyQWg2bAN647Q+O811tG9MrJ38Z10jjhQdKNAL8fsyPzE3cCN/uT+f55cFVY4aGO4jqJAvmqsuY3GQDwAoXg==
+  /@babel/plugin-syntax-json-strings/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-lY6kdGpWHvjoe2vk4WrAapEuBR69EMxZl+RoGRhrFGNYVK8mOPAW8VfbT/ZgrFbXlDNiiaxQnAtgVCZ6jv30EA==
   /@babel/plugin-syntax-json-strings/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-json-strings/7.8.3
@@ -335,9 +357,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-lY6kdGpWHvjoe2vk4WrAapEuBR69EMxZl+RoGRhrFGNYVK8mOPAW8VfbT/ZgrFbXlDNiiaxQnAtgVCZ6jv30EA==
+  /@babel/plugin-syntax-logical-assignment-operators/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-Zpg2Sgc++37kuFl6ppq2Q7Awc6E6AIW671x5PY8E/f7MCIyPPGK/EoeZXvvY3P42exZ3Q4/t3YOzP/HiN79jDg==
   /@babel/plugin-syntax-logical-assignment-operators/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-logical-assignment-operators/7.8.3
@@ -345,9 +372,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-Zpg2Sgc++37kuFl6ppq2Q7Awc6E6AIW671x5PY8E/f7MCIyPPGK/EoeZXvvY3P42exZ3Q4/t3YOzP/HiN79jDg==
+  /@babel/plugin-syntax-nullish-coalescing-operator/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-aSff4zPII1u2QD7y+F8oDsz19ew4IGEJg9SVW+bqwpwtfFleiQDMdzA/R+UlWDzfnHFCxxleFT0PMIrR36XLNQ==
   /@babel/plugin-syntax-nullish-coalescing-operator/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-nullish-coalescing-operator/7.8.3
@@ -355,9 +387,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-aSff4zPII1u2QD7y+F8oDsz19ew4IGEJg9SVW+bqwpwtfFleiQDMdzA/R+UlWDzfnHFCxxleFT0PMIrR36XLNQ==
+  /@babel/plugin-syntax-numeric-separator/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-H7dCMAdN83PcCmqmkHB5dtp+Xa9a6LKSvA2hiFBC/5alSHxM5VgWZXFqDi0YFe8XNGT6iCa+z4V4zSt/PdZ7Dw==
   /@babel/plugin-syntax-numeric-separator/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-numeric-separator/7.8.3
@@ -365,9 +402,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-H7dCMAdN83PcCmqmkHB5dtp+Xa9a6LKSvA2hiFBC/5alSHxM5VgWZXFqDi0YFe8XNGT6iCa+z4V4zSt/PdZ7Dw==
+  /@babel/plugin-syntax-object-rest-spread/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-XoqMijGZb9y3y2XskN+P1wUGiVwWZ5JmoDRwx5+3GmEplNyVM2s2Dg8ILFQm8rWM48orGy5YpI5Bl8U1y7ydlA==
   /@babel/plugin-syntax-object-rest-spread/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-object-rest-spread/7.8.3
@@ -375,9 +417,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-XoqMijGZb9y3y2XskN+P1wUGiVwWZ5JmoDRwx5+3GmEplNyVM2s2Dg8ILFQm8rWM48orGy5YpI5Bl8U1y7ydlA==
+  /@babel/plugin-syntax-optional-catch-binding/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-6VPD0Pc1lpTqw0aKoeRTMiB+kWhAoT24PA+ksWSBrFtl5SIRVpZlwN3NNPQjehA2E/91FV3RjLWoVTglWcSV3Q==
   /@babel/plugin-syntax-optional-catch-binding/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-optional-catch-binding/7.8.3
@@ -385,9 +432,14 @@ packages:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-6VPD0Pc1lpTqw0aKoeRTMiB+kWhAoT24PA+ksWSBrFtl5SIRVpZlwN3NNPQjehA2E/91FV3RjLWoVTglWcSV3Q==
+  /@babel/plugin-syntax-optional-chaining/7.8.3:
+    dev: false
+    peerDependencies:
+      '@babel/core': ^7.0.0-0
+    resolution:
+      integrity: sha512-KoK9ErH1MBlCPxV0VANkXW2/dw4vlbGDrFgz8bmUsBGYkFRcbRwMh6cIJubdPrkxRwuGdtCk0v/wPTKbQgBjkg==
   /@babel/plugin-syntax-optional-chaining/7.8.3/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/helper-plugin-utils': 7.8.3
     dev: false
     id: registry.npmjs.org/@babel/plugin-syntax-optional-chaining/7.8.3
@@ -993,6 +1045,16 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-pMQYPBx3SjaPlIT05MO0pZQkxIdziuMRGX5hufTF9462H9G9+axoqEuiu2CygFuPjplmbaXiZxq9/UAv2CrOEw==
+  /@microsoft/rush-stack-compiler-3.7/0.2.11/typescript@3.7.5:
+    dependencies:
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.7.5
+      tslint: /tslint/5.12.1/typescript@3.7.5
+      tslint-microsoft-contrib: /tslint-microsoft-contrib/6.2.0/tslint@5.12.1+typescript@3.7.5
+    dev: false
+    hasBin: true
+    id: registry.npmjs.org/@microsoft/rush-stack-compiler-3.7/0.2.11
+    resolution:
+      integrity: sha512-pMQYPBx3SjaPlIT05MO0pZQkxIdziuMRGX5hufTF9462H9G9+axoqEuiu2CygFuPjplmbaXiZxq9/UAv2CrOEw==
   /@microsoft/tsdoc-config/0.13.3:
     dependencies:
       '@microsoft/tsdoc': 0.12.19
@@ -1057,12 +1119,10 @@ packages:
       '@typescript-eslint/experimental-utils': /@typescript-eslint/experimental-utils/2.3.3/eslint@6.5.1
       '@typescript-eslint/parser': /@typescript-eslint/parser/2.3.3/eslint@6.5.1
       '@typescript-eslint/typescript-estree': 2.3.3
-      eslint: 6.5.1
       eslint-plugin-promise: 4.2.1
       eslint-plugin-react: /eslint-plugin-react/7.16.0/eslint@6.5.1
       eslint-plugin-security: 1.4.0
       eslint-plugin-tsdoc: 0.2.4
-      typescript: 3.7.5
     dev: false
     id: registry.npmjs.org/@rushstack/eslint-config/0.5.7
     peerDependencies:
@@ -1070,18 +1130,14 @@ packages:
       typescript: '>=3.0.0'
     resolution:
       integrity: sha512-a7Ww6pI0T7S4XF+C9SZAkx+pNwljCW4zLgyYOmpyc3ofLZYcVn9ErRCd09b9Hh+U37GlMfpjFdIt2PtVSoX/0g==
-  /@rushstack/eslint-config/0.5.7/typescript@3.9.2:
+  /@rushstack/eslint-config/0.5.7/typescript@3.7.5:
     dependencies:
       '@rushstack/eslint-plugin': 0.3.2
-      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.3.3/d1f26fe0c5b0fb8f62123e7963affd7a
+      '@typescript-eslint/eslint-plugin': /@typescript-eslint/eslint-plugin/2.3.3/8017f51c6a21fadeb3d319c609d9d257
       '@typescript-eslint/experimental-utils': 2.3.3
       '@typescript-eslint/parser': 2.3.3
-      '@typescript-eslint/typescript-estree': 2.3.3
-      eslint-plugin-promise: 4.2.1
       eslint-plugin-react: 7.16.0
-      eslint-plugin-security: 1.4.0
-      eslint-plugin-tsdoc: 0.2.4
-      typescript: 3.9.2
+      typescript: 3.7.5
     dev: false
     id: registry.npmjs.org/@rushstack/eslint-config/0.5.7
     peerDependencies:
@@ -1407,14 +1463,11 @@ packages:
       eslint: ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-12cCbwu5PbQudkq2xCIS/QhB7hCMrsNPXK+vJtqy/zFqtzVkPRGy12O5Yy0gUK086f3VHV/P4a4R4CjMW853pA==
-  /@typescript-eslint/eslint-plugin/2.3.3/@typescript-eslint!parser@2.3.3:
+  /@typescript-eslint/eslint-plugin/2.3.3/8017f51c6a21fadeb3d319c609d9d257:
     dependencies:
       '@typescript-eslint/experimental-utils': 2.3.3
       '@typescript-eslint/parser': 2.3.3
-      eslint-utils: 1.4.3
-      functional-red-black-tree: 1.0.1
-      regexpp: 2.0.1
-      tsutils: 3.17.1
+      tsutils: /tsutils/3.17.1/typescript@3.7.5
     dev: false
     engines:
       node: ^8.10.0 || ^10.13.0 || >=11.10.1
@@ -1424,14 +1477,14 @@ packages:
       eslint: ^5.0.0 || ^6.0.0
     resolution:
       integrity: sha512-12cCbwu5PbQudkq2xCIS/QhB7hCMrsNPXK+vJtqy/zFqtzVkPRGy12O5Yy0gUK086f3VHV/P4a4R4CjMW853pA==
-  /@typescript-eslint/eslint-plugin/2.3.3/d1f26fe0c5b0fb8f62123e7963affd7a:
+  /@typescript-eslint/eslint-plugin/2.3.3/@typescript-eslint!parser@2.3.3:
     dependencies:
       '@typescript-eslint/experimental-utils': 2.3.3
       '@typescript-eslint/parser': 2.3.3
       eslint-utils: 1.4.3
       functional-red-black-tree: 1.0.1
       regexpp: 2.0.1
-      tsutils: /tsutils/3.17.1/typescript@3.9.2
+      tsutils: 3.17.1
     dev: false
     engines:
       node: ^8.10.0 || ^10.13.0 || >=11.10.1
@@ -1962,21 +2015,12 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-9dA9+GmMjIzgPnYtkhBg73gOo/RHqPmLruP3BaGL4KEX3Dwz6pI8auSN8G8+iuEG90+GSswyKvslN+JYSaacaQ==
-  /babel-jest/26.0.1/@babel!core@7.9.6:
+  /babel-jest/26.0.1:
     dependencies:
-      '@babel/core': 7.9.6
-      '@jest/transform': 26.0.1
-      '@jest/types': 26.0.1
-      '@types/babel__core': 7.1.7
-      babel-plugin-istanbul: 6.0.0
-      babel-preset-jest: /babel-preset-jest/26.0.0/@babel!core@7.9.6
-      chalk: 4.0.0
-      graceful-fs: 4.2.4
-      slash: 3.0.0
+      babel-preset-jest: 26.0.0
     dev: false
     engines:
       node: '>= 10.14.2'
-    id: registry.npmjs.org/babel-jest/26.0.1
     peerDependencies:
       '@babel/core': ^7.0.0
     resolution:
@@ -2003,19 +2047,25 @@ packages:
       node: '>= 8.3'
     resolution:
       integrity: sha512-u+/W+WAjMlvoocYGTwthAiQSxDcJAyHpQ6oWlHdFZaaN+Rlk8Q7iiwDPg2lN/FyJtAYnKjFxbn7xus4HCFkg5g==
-  /babel-plugin-jest-hoist/26.0.0:
+  /babel-preset-current-node-syntax/0.1.2:
     dependencies:
-      '@babel/template': 7.8.6
-      '@babel/types': 7.9.6
-      '@types/babel__traverse': 7.0.11
+      '@babel/plugin-syntax-async-generators': 7.8.4
+      '@babel/plugin-syntax-bigint': 7.8.3
+      '@babel/plugin-syntax-class-properties': 7.8.3
+      '@babel/plugin-syntax-json-strings': 7.8.3
+      '@babel/plugin-syntax-logical-assignment-operators': 7.8.3
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3
+      '@babel/plugin-syntax-numeric-separator': 7.8.3
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3
+      '@babel/plugin-syntax-optional-catch-binding': 7.8.3
+      '@babel/plugin-syntax-optional-chaining': 7.8.3
     dev: false
-    engines:
-      node: '>= 10.14.2'
+    peerDependencies:
+      '@babel/core': ^7.0.0
     resolution:
-      integrity: sha512-+AuoehOrjt9irZL7DOt2+4ZaTM6dlu1s5TTS46JBa0/qem4dy7VNW3tMb96qeEqcIh20LD73TVNtmVEeymTG7w==
+      integrity: sha512-u/8cS+dEiK1SFILbOC8/rUI3ml9lboKuuMvZ/4aQnQmhecQAgPw5ew066C1ObnEAUmlx7dv/s2z52psWEtLNiw==
   /babel-preset-current-node-syntax/0.1.2/@babel!core@7.9.6:
     dependencies:
-      '@babel/core': 7.9.6
       '@babel/plugin-syntax-async-generators': /@babel/plugin-syntax-async-generators/7.8.4/@babel!core@7.9.6
       '@babel/plugin-syntax-bigint': /@babel/plugin-syntax-bigint/7.8.3/@babel!core@7.9.6
       '@babel/plugin-syntax-class-properties': /@babel/plugin-syntax-class-properties/7.8.3/@babel!core@7.9.6
@@ -2045,15 +2095,12 @@ packages:
       '@babel/core': ^7.0.0
     resolution:
       integrity: sha512-8ZczygctQkBU+63DtSOKGh7tFL0CeCuz+1ieud9lJ1WPQ9O6A1a/r+LGn6Y705PA6whHQ3T1XuB/PmpfNYf8Fw==
-  /babel-preset-jest/26.0.0/@babel!core@7.9.6:
+  /babel-preset-jest/26.0.0:
     dependencies:
-      '@babel/core': 7.9.6
-      babel-plugin-jest-hoist: 26.0.0
-      babel-preset-current-node-syntax: /babel-preset-current-node-syntax/0.1.2/@babel!core@7.9.6
+      babel-preset-current-node-syntax: 0.1.2
     dev: false
     engines:
       node: '>= 10.14.2'
-    id: registry.npmjs.org/babel-preset-jest/26.0.0
     peerDependencies:
       '@babel/core': ^7.0.0
     resolution:
@@ -4892,7 +4939,7 @@ packages:
       '@babel/core': 7.9.6
       '@jest/test-sequencer': 26.0.1
       '@jest/types': 26.0.1
-      babel-jest: /babel-jest/26.0.1/@babel!core@7.9.6
+      babel-jest: 26.0.1
       chalk: 4.0.0
       deepmerge: 4.2.2
       glob: 7.1.6
@@ -8274,20 +8321,10 @@ packages:
       typescript: '>=3.8 <4.0'
     resolution:
       integrity: sha512-eBpWH65mGgzobuw7UZy+uPP9lwu+tPp60o324ASRX4Ijg8UC5dl2zcge4kkmqr2Zeuk9FwIjvCTOPuNMEyGWWw==
-  /ts-jest/26.0.0/jest@26.0.1+typescript@3.9.2:
+  /ts-jest/26.0.0/jest@26.0.1+typescript@3.7.5:
     dependencies:
-      bs-logger: 0.2.6
-      buffer-from: 1.1.1
-      fast-json-stable-stringify: 2.1.0
       jest: 26.0.1
-      json5: 2.1.3
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      micromatch: 4.0.2
-      mkdirp: 1.0.4
-      semver: 7.3.2
-      typescript: 3.9.2
-      yargs-parser: 18.1.3
+      typescript: 3.7.5
     dev: false
     engines:
       node: '>= 10'
@@ -8380,18 +8417,6 @@ packages:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     resolution:
       integrity: sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
-  /tsutils/3.17.1/typescript@3.9.2:
-    dependencies:
-      tslib: 1.13.0
-      typescript: 3.9.2
-    dev: false
-    engines:
-      node: '>= 6'
-    id: registry.npmjs.org/tsutils/3.17.1
-    peerDependencies:
-      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
-    resolution:
-      integrity: sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
   /tunnel-agent/0.6.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -8465,13 +8490,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-/P5lkRXkWHNAbcJIiHPfRoKqyd7bsyCma1hZNUGfn20qm64T6ZBlrzprymeu918H+mB/0rIg2gGK/BXkhhYgBw==
-  /typescript/3.9.2:
-    dev: false
-    engines:
-      node: '>=4.2.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-q2ktq4n/uLuNNShyayit+DTobV2ApPEo/6so68JaD5ojvc/6GClBipedB9zNWYxRSAlZXAe405Rlijzl6qDiSw==
   /uglify-js/3.9.3:
     dependencies:
       commander: 2.20.3
@@ -9066,21 +9084,23 @@ packages:
   'file:projects/build-toolchain.tgz':
     dependencies:
       '@microsoft/node-library-build': 6.4.13
-      '@microsoft/rush-stack-compiler-3.7': 0.2.11
-      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.9.2
+      '@microsoft/rush-stack-compiler-3.7': /@microsoft/rush-stack-compiler-3.7/0.2.11/typescript@3.7.5
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.7.5
       '@types/jest': 25.2.2
       '@types/node': 14.0.1
       colors: 1.4.0
       gulp: 4.0.2
       jest: 26.0.1
       jest-config: 26.0.1
+      jest-serializer: 26.0.0
       rimraf: 3.0.2
-      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.9.2
-      typescript: 3.9.2
+      sane: 4.1.0
+      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.7.5
+      typescript: 3.7.5
     dev: false
     name: '@rush-temp/build-toolchain'
     resolution:
-      integrity: sha512-PH6RwYB9jjy5jshY68d0aomwectyr1Ax+fusvYwrt2c8ob6ER7qm82Nl5bG4/r9q4HJorB9K14/sjD4NiX59bw==
+      integrity: sha512-PwX8s/d0J0eXBm1Sc2QTNQ8hGeoK83SwE9M1jrXoWnL/g4oAjlcEPzAVdRYIaRB+B9WcVH0UclhfJ4YhoLW/1A==
       tarball: 'file:projects/build-toolchain.tgz'
     version: 0.0.0
   'file:projects/publish-pipeline-result.tgz':
@@ -9088,8 +9108,8 @@ packages:
       '@azure/event-hubs': 5.2.0
       '@azure/storage-blob': 12.1.1
       '@microsoft/node-library-build': 6.4.13
-      '@microsoft/rush-stack-compiler-3.7': 0.2.11
-      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.9.2
+      '@microsoft/rush-stack-compiler-3.7': /@microsoft/rush-stack-compiler-3.7/0.2.11/typescript@3.7.5
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.7.5
       '@types/convict': 5.2.1
       '@types/jest': 25.2.2
       '@types/node': 14.0.1
@@ -9099,35 +9119,39 @@ packages:
       gulp: 4.0.2
       jest: 26.0.1
       jest-config: 26.0.1
+      jest-serializer: 26.0.0
       logform: 2.1.2
       moment: 2.25.3
-      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.9.2
-      typescript: 3.9.2
+      sane: 4.1.0
+      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.7.5
+      typescript: 3.7.5
       whatwg-fetch: 3.0.0
       winston: 3.2.1
       yargs: 15.3.1
     dev: false
     name: '@rush-temp/publish-pipeline-result'
     resolution:
-      integrity: sha512-xV2n+Dk9pl4rtWGSR8ngOfwNwW/Qy/V1y4e7XhJnzYeEdwaoxyS+KBNCQlS6/z6S34+qy9705A0rWq5kStokQw==
+      integrity: sha512-UjYDcMWEZgBth3IZ09OnShFodKF6M4x0+rGupk5XWAKCOhKDttxrZSXEVOB8LeZZN9bGbJh1VJ7ua2UkZcjBQQ==
       tarball: 'file:projects/publish-pipeline-result.tgz'
     version: 0.0.0
   'file:projects/swagger-validation-common.tgz':
     dependencies:
       '@microsoft/node-library-build': 6.4.13
-      '@microsoft/rush-stack-compiler-3.7': 0.2.11
-      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.9.2
+      '@microsoft/rush-stack-compiler-3.7': /@microsoft/rush-stack-compiler-3.7/0.2.11/typescript@3.7.5
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.7/typescript@3.7.5
       '@types/jest': 25.2.2
       '@types/node': 14.0.1
       gulp: 4.0.2
       jest: 26.0.1
       jest-config: 26.0.1
-      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.9.2
-      typescript: 3.9.2
+      jest-serializer: 26.0.0
+      sane: 4.1.0
+      ts-jest: /ts-jest/26.0.0/jest@26.0.1+typescript@3.7.5
+      typescript: 3.7.5
     dev: false
     name: '@rush-temp/swagger-validation-common'
     resolution:
-      integrity: sha512-BkeqKZMsME022gmiHeycG0ONG/m2X0HSu2EGL7y8qQzJKd4U7qRwzBUD10nBX89KIMQrjMHClj8I6o22lUSpLg==
+      integrity: sha512-fB7fhoMYBV5xrgxUSX52Mnv1UOSdmIiQLXnM+DE0Bq5oZ4tX4FdXg5L17t1x6R5muoGdZXJEIchALpxDXpx5OQ==
       tarball: 'file:projects/swagger-validation-common.tgz'
     version: 0.0.0
 registry: 'https://registry.npmjs.org/'
@@ -9152,11 +9176,13 @@ specifiers:
   gulp: ~4.0.2
   jest: ~26.0.1
   jest-config: ~26.0.1
+  jest-serializer: ~26.0.0
   logform: ~2.1.2
   moment: ~2.25.3
   rimraf: ^3.0.2
+  sane: ~4.1.0
   ts-jest: ~26.0.0
-  typescript: 3.9.2
+  typescript: 3.7.5
   whatwg-fetch: ^3.0.0
   winston: ~3.2.1
   yargs: ~15.3.1
