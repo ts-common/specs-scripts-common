@@ -13,28 +13,28 @@
   "dependencies": {
     "swagger-validation-common": "^1.0.0",
     "whatwg-fetch": "^3.0.0",
-    "@azure/event-hubs": "~5.0.2",
+    "@azure/event-hubs": "~5.2.0",
     "@azure/storage-blob": "~12.1.1",
     "yargs": "~15.3.1",
-    "moment": "~2.24.0",
+    "moment": "~2.25.3",
     "winston": "~3.2.1",
     "logform": "~2.1.2",
-    "convict": "~5.2.0"
+    "convict": "~6.0.0"
   },
   "devDependencies": {
     "build-toolchain": "^1.0.0",
-    "typescript": "3.7.5",
-    "@microsoft/node-library-build": "~6.4.6",
-    "jest": "~25.1.0",
+    "typescript": "3.9.2",
+    "@microsoft/node-library-build": "~6.4.13",
+    "jest": "~26.0.1",
     "gulp": "~4.0.2",
-    "@microsoft/rush-stack-compiler-3.7": "~0.2.5",
-    "@rushstack/eslint-config": "~0.5.5",
-    "@types/node": "~13.9.2",
-    "ts-jest": "~25.2.1",
-    "@types/jest": "~25.1.4",
-    "jest-config": "~25.1.0",
-    "@types/yargs": "~15.0.4",
+    "@microsoft/rush-stack-compiler-3.7": "~0.2.11",
+    "@rushstack/eslint-config": "~0.5.7",
+    "@types/node": "~14.0.1",
+    "ts-jest": "~26.0.0",
+    "@types/jest": "~25.2.2",
+    "jest-config": "~26.0.1",
+    "@types/yargs": "~15.0.5",
     "@types/winston": "~2.4.4",
-    "@types/convict": "~4.2.1"
+    "@types/convict": "~5.2.1"
   }
 }
