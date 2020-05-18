@@ -12,6 +12,14 @@
    */
   "commands": [
     {
+      "commandKind": "bulk",
+      "enableParallelism": true,
+      "ignoreMissingScript": true,
+      "name": "test",
+      "summary": "test",
+      "allowWarningsInSuccessfulBuild": true
+    },
+    {
       /**
        * (Required) Determines the type of custom command.
        * Rush's "bulk" commands are invoked separately for each project.  Rush will look in

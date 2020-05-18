@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "gulp build && jest",
+    "build": "gulp build",
     "test": "jest",
     "copy-package": "cp -rf package.json lib",
     "dist": "npm run copy-package && cd lib && npm publish",

@@ -14,3 +14,6 @@ steps:
   displayName: 'Rush Install'
 - script: 'node common/scripts/install-run-rush.js rebuild --verbose'
   displayName: 'Rush Rebuild'
+- script: 'node common/scripts/install-run-rush.js test'
+  displayName: 'Rush test'
+
