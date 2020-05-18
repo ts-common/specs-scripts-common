@@ -3,6 +3,14 @@
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/approved-packages.schema.json",
   "packages": [
     {
+      "name": "@azure/event-hubs",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@azure/storage-blob",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "@microsoft/node-library-build",
       "allowedCategories": [ "production", "tools" ]
     },
@@ -15,11 +23,27 @@
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "@types/convict",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "@types/jest",
       "allowedCategories": [ "production", "tools" ]
     },
     {
+      "name": "@types/winston",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "@types/yargs",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "build-toolchain",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "convict",
       "allowedCategories": [ "production" ]
     },
     {
@@ -29,6 +53,18 @@
     {
       "name": "jest",
       "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "jest-config",
+      "allowedCategories": [ "production", "tools" ]
+    },
+    {
+      "name": "logform",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "moment",
+      "allowedCategories": [ "production" ]
     },
     {
       "name": "my-controls",
@@ -44,6 +80,14 @@
     },
     {
       "name": "whatwg-fetch",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "winston",
+      "allowedCategories": [ "production" ]
+    },
+    {
+      "name": "yargs",
       "allowedCategories": [ "production" ]
     }
   ]

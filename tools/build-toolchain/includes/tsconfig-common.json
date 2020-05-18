@@ -8,10 +8,10 @@
     "sourceMap": true,
     "inlineSources": true,
     "strict": true,
-    "types": [],
-
     "module": "commonjs",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "target": "es5",
     "lib": [
       "es5",
