@@ -11,6 +11,10 @@
       "allowedCategories": [ "production" ]
     },
     {
+      "name": "@azure/swagger-validation-common",
+      "allowedCategories": [ "production" ]
+    },
+    {
       "name": "@microsoft/node-library-build",
       "allowedCategories": [ "production", "tools" ]
     },

@@ -1,5 +1,5 @@
+import { PipelineResult, PipelineStatus, PipelineTriggerSource } from '@azure/swagger-validation-common';
 import convict from 'convict';
-import { PipelineResult, PipelineStatus, PipelineTriggerSource } from 'swagger-validation-common';
 
 const statuses: ReadonlyArray<PipelineStatus> = ["in_progress", "completed"];
 const results: ReadonlyArray<PipelineResult> = ["success", "failure"];

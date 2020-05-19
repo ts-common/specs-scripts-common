@@ -1,6 +1,6 @@
 {
-  "name": "publish-pipeline-result",
-  "version": "1.0.0",
+  "name": "@azure/publish-pipeline-result",
+  "version": "0.0.1",
   "description": "An tool for publish pipeline result",
   "license": "MIT",
   "scripts": {
@@ -8,10 +8,12 @@
     "test": "jest",
     "build-test": "npm run build && npm test",
     "build-demo": "node_modules/.bin/my-build",
+    "copy-package": "cp -rf package.json dist",
+    "dist": "npm run copy-package && cd dist && npm publish --access public",
     "my-bulk-command": "node_modules/.bin/my-bulk-command"
   },
   "dependencies": {
-    "swagger-validation-common": "^1.0.0",
+    "@azure/swagger-validation-common": "^0.0.1",
     "whatwg-fetch": "^3.0.0",
     "@azure/event-hubs": "~5.0.2",
     "@azure/storage-blob": "~12.1.1",

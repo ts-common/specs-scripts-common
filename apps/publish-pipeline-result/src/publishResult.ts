@@ -1,10 +1,5 @@
 #!/usr/bin/env node
-import {
-  CompletedEvent,
-  InProgressEvent,
-  PipelineEvent,
-  PipelineRun,
-} from "swagger-validation-common";
+import { CompletedEvent, InProgressEvent, PipelineEvent, PipelineRun } from '@azure/swagger-validation-common';
 
 import { AzureBlobClient } from "./AzureBlobClient";
 import { configSchema, PublishResultConfig } from "./config";

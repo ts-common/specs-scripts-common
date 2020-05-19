@@ -332,7 +332,7 @@
       /**
        * The NPM package name of the project (must match package.json)
        */
-      "packageName": "publish-pipeline-result",
+      "packageName": "@azure/publish-pipeline-result",
 
       /**
        * The path to the project folder, relative to the rush.json config file.
@@ -375,7 +375,7 @@
     },
 
     {
-      "packageName": "swagger-validation-common",
+      "packageName": "@azure/swagger-validation-common",
       "projectFolder": "libraries/swagger-validation-common",
       "reviewCategory": "production"
     },
