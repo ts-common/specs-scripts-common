@@ -13,7 +13,7 @@
     "my-bulk-command": "node_modules/.bin/my-bulk-command"
   },
   "dependencies": {
-    "@azure/swagger-validation-common": "^0.0.1",
+    "@azure/swagger-validation-common": "^0.0.2",
     "whatwg-fetch": "^3.0.0",
     "@azure/event-hubs": "~5.0.2",
     "@azure/storage-blob": "~12.1.1",

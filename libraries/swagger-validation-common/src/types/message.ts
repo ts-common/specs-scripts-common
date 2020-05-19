@@ -17,22 +17,17 @@ export type BaseMessageRecord = {
 };
 
 export type ResultMessageRecord = BaseMessageRecord & {
+  type: "Result";
   id?: string;
   code?: string;
   docUrl?: string;
   paths: JsonPath[];
 };
 
-export type RawMessageRecord = BaseMessageRecord;
-
-export type RawMessage = {
+export type RawMessageRecord = BaseMessageRecord & {
   type: "Raw";
-  data: RawMessageRecord[];
 };
 
-export type ResultMessage = {
-  type: "Result";
-  data: ResultMessageRecord[];
-};
+export type MessageRecord = ResultMessageRecord | RawMessageRecord 
 
-export type Message = ResultMessage | RawMessage;
+export type MessageLine = MessageRecord | MessageRecord[]
