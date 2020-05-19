@@ -31,5 +31,23 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.SourcesDirectory)/libraries/swagger-validation-common/drop
+- task: Npm@1
+  displayName: 'npm pack apps/publish-pipeline-result'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: pack
+    workingDir: $(Build.SourcesDirectory)/apps/publish-pipeline-result
+- task: CopyFiles@2
+  displayName: 'Copy Files to: drop'
+  inputs:
+    Contents: '$(Build.SourcesDirectory)/apps/publish-pipeline-result/*.tgz'
+    TargetFolder: $(Build.SourcesDirectory)/apps/publish-pipeline-result/drop
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.SourcesDirectory)/apps/publish-pipeline-result/drop
+
+
+
 
 
