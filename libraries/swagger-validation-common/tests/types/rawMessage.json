@@ -1,13 +1,9 @@
 {
   "type": "Raw",
-  "data": [
-    {
-      "level": "Error",
-      "message": "the tool failed",
-      "time": "2012-04-23T18:25:43.511Z",
-      "extra": {
-        "role": "sdk automation"
-      }
-    }
-  ]
+  "level": "Error",
+  "message": "the tool failed",
+  "time": "2012-04-23T18:25:43.511Z",
+  "extra": {
+    "role": "sdk automation"
+  }
 }

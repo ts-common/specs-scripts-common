@@ -14,7 +14,6 @@ export {
   BaseMessageRecord,
   ResultMessageRecord,
   RawMessageRecord,
-  RawMessage,
-  ResultMessage,
-  Message,
+  MessageLine,
+  MessageRecord,
 } from "./types/message";
