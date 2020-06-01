@@ -30,7 +30,23 @@ jest.mock("@azure/storage-blob", () => ({
 }));
 
 describe("publishResult", () => {
+
+  const OLD_ENV = process.env;
+
+  beforeEach(() => {
+    jest.resetModules() // this is important - it clears the cache
+    process.env = { ...OLD_ENV };
+    delete process.env.NODE_ENV;
+  });
+
+  afterEach(() => {
+    process.env = OLD_ENV;
+  })
+
   it("should send in progress event", async () => {
+    process.env.SYSTEM_COLLECTIONURI = "https://systemcollection.com";
+    process.env.SYSTEM_TEAMPROJECT = "teamproject";
+    process.env.BUILD_BUILDID = "123";
     const argv: PublishResultConfig = {
       source:"github",
       repoKey: "testorg/testspecrepo",
@@ -46,10 +62,14 @@ describe("publishResult", () => {
   });
 
   it("should send completed event", async () => {
+    process.env.SYSTEM_COLLECTIONURI = "https://systemcollection.com";
+    process.env.SYSTEM_TEAMPROJECT = "teamproject";
+    process.env.BUILD_BUILDID = "123";
+
     const argv: PublishResultConfig = {
       source: "github",
       repoKey: "testorg/testspecrepo",
-      pipelineBuildId: "1",
+      pipelineBuildId: "123",
       pipelineJobId: "1",
       pipelineTaskId: "1",
       unifiedPipelineTaskKey: "LintDiff",

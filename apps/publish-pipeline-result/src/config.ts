@@ -1,5 +1,5 @@
-import { PipelineResult, PipelineStatus, PipelineTriggerSource } from '@azure/swagger-validation-common';
-import convict from 'convict';
+import { PipelineResult, PipelineStatus, PipelineTriggerSource } from "@azure/swagger-validation-common";
+import convict from "convict";
 
 const statuses: ReadonlyArray<PipelineStatus> = ["in_progress", "completed"];
 const results: ReadonlyArray<PipelineResult> = ["success", "failure"];
@@ -12,7 +12,7 @@ const stringMustHaveLength = (value: string) => {
 };
 
 export interface PublishResultConfig {
-  source: PipelineTriggerSource
+  source: PipelineTriggerSource;
   repoKey: string;
   unifiedPipelineBuildId: string;
   unifiedPipelineTaskKey: string;
@@ -33,42 +33,48 @@ export const configSchema = convict<PublishResultConfig>({
     default: "github",
     doc: "Source from which the pipeline is triggered",
     arg: "source",
+    env: "SOURCE",
   },
   repoKey: {
     format: stringMustHaveLength,
     default: "",
     doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
     arg: "repoKey",
+    env: "REPO_KEY"
   },
   unifiedPipelineTaskKey: {
     format: stringMustHaveLength,
     default: "",
     doc: "pipeline job name",
     arg: "unifiedPipelineTaskKey",
+    env: "TASK_KEY"
   },
   unifiedPipelineBuildId: {
     format: stringMustHaveLength,
     default: "",
     doc: "unified pipeline allocated unique task id",
     arg: "unifiedPipelineBuildId",
+    env: "UNIFIED_PIPELINE_BUILD_ID",
   },
   pipelineBuildId: {
     format: stringMustHaveLength,
     default: "",
     doc: "azure pipeline build id",
     arg: "pipelineBuildId",
+    env: "BUILD_BUILDID",
   },
   pipelineJobId: {
     format: stringMustHaveLength,
     default: "",
     doc: "azure pipeline job id",
     arg: "pipelineJobId",
+    env: "SYSTEM_JOBID"
   },
   pipelineTaskId: {
-    format: stringMustHaveLength,
     default: "",
     doc: "azure pipeline task id",
     arg: "pipelineTaskId",
+    env: "VALIDATION_TASKID"
   },
   status: {
     format: statuses,

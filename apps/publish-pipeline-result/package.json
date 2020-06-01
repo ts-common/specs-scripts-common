@@ -1,6 +1,6 @@
 {
   "name": "@azure/publish-pipeline-result",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An tool for publish pipeline result",
   "license": "MIT",
   "scripts": {

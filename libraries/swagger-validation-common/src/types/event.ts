@@ -9,6 +9,7 @@ export type PipelineRun = {
   pipelineBuildId: string; // the id of the record for the completed azure pipeline build.
   pipelineJobId: string; // the id of the record for the completed azure pipeline job.
   pipelineTaskId: string; // the id of the record for the completed azure pipeline task.
+  logUrl: string; // the log url of the underlying azure pipeline
 };
 
 export type PipelineStatus = "queued" | "in_progress" | "completed";

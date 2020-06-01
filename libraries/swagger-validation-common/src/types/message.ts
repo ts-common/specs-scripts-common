@@ -5,6 +5,10 @@ export type JsonPath = {
   path: string;
 };
 
+export type MesssageContext = {
+  toolVersion: string; 
+}
+
 export type Extra = {
   [key: string]: any;
 };
@@ -13,6 +17,7 @@ export type BaseMessageRecord = {
   level: MessageLevel;
   message: string;
   time: Date;
+  context?: MesssageContext;
   extra?: Extra;
 };
 

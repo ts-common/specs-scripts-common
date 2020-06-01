@@ -57,16 +57,26 @@ class ResultPublisher {
     }
   }
 }
+
+const getAzurePipelineLog = (jobId: string, taskId?: string): string => {
+  const jobLogUrl = `${process.env.SYSTEM_COLLECTIONURI}/${process.env.SYSTEM_TEAMPROJECT}/_build/results?buildId=${process.env.BUILD_BUILDID}&view=logs&j=${jobId}`;
+  if (taskId) {
+    return `${jobLogUrl}&t=${taskId}`;
+  }
+  return jobLogUrl;
+}
+
 export async function main(config: PublishResultConfig): Promise<void> {
   const resultPublisher = new ResultPublisher(config);
-  const event: PipelineRun = {
+  const event = {
     source: config.source,
     unifiedPipelineTaskKey: config.unifiedPipelineTaskKey,
     unifiedPipelineBuildId: config.unifiedPipelineBuildId,
     pipelineBuildId: config.pipelineBuildId,
     pipelineJobId: config.pipelineJobId,
     pipelineTaskId: config.pipelineTaskId,
-  };
+    logUrl: getAzurePipelineLog(config.pipelineJobId, config.pipelineTaskId)
+  } as PipelineRun;
   const partitionKey = config.unifiedPipelineBuildId;
   switch (config.status) {
     case "in_progress":
