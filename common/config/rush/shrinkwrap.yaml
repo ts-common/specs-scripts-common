@@ -1,6 +1,7 @@
 dependencies:
   '@azure/event-hubs': 5.0.2
   '@azure/storage-blob': 12.1.1
+  '@azure/swagger-validation-common': 0.0.2
   '@microsoft/node-library-build': 6.4.6
   '@microsoft/rush-stack-compiler-3.7': 0.2.5
   '@rush-temp/build-toolchain': 'file:projects/build-toolchain.tgz'
@@ -169,6 +170,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FhzXfrPe5DZE5KNbFoKXXhGqX362I+dGv0jVINCCQiToqadROZ1tRFtJ3ljnMPs75fZZzwnbq+oIB6NnpBqOzA==
+  /@azure/swagger-validation-common/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-/OTgP3USqq2Cko6vzDgmODpqGjk9eTANYMBMXtgsTgh9RtR6b3HZdQTPe5dqkqes/YoIBW8IarJ0B0HucAv1+A==
   /@babel/code-frame/7.8.3:
     dependencies:
       '@babel/highlight': 7.8.3
@@ -253,14 +258,20 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-mO5GWzBPsPf6865iIbzNE0AvkKF3NE+2S3eRUpE+FE07BOAkXh6G+GW/Pj01hhXjve1WScbaIO4UlY1JKeqCcA==
-  /@babel/plugin-syntax-bigint/7.8.3:
+  /@babel/plugin-syntax-bigint/7.8.3/@babel!core@7.8.7:
+    dependencies:
+      '@babel/core': 7.8.7
     dev: false
+    id: registry.npmjs.org/@babel/plugin-syntax-bigint/7.8.3
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
       integrity: sha512-wnTnFlG+YxQm3vDxpGE57Pj0srRU4sHE/mDkt1qv2YJJSeUAec2ma4WLUnUPeKjyrfntVwe/N6dCXpU+zL3Npg==
-  /@babel/plugin-syntax-object-rest-spread/7.8.3:
+  /@babel/plugin-syntax-object-rest-spread/7.8.3/@babel!core@7.8.7:
+    dependencies:
+      '@babel/core': 7.8.7
     dev: false
+    id: registry.npmjs.org/@babel/plugin-syntax-object-rest-spread/7.8.3
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
@@ -608,16 +619,6 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-vuZ1LPMEtpIvkzJAPdxLkyibyejwv5OKijd/hp69wgRRhg9I/3IWvKnfN9tXiI7EXfpECTzvoNwKHAxbPmGyyg==
-  /@microsoft/rush-stack-compiler-3.7/0.2.5/typescript@3.7.5:
-    dependencies:
-      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.5/typescript@3.7.5
-      tslint: /tslint/5.12.1/typescript@3.7.5
-      tslint-microsoft-contrib: /tslint-microsoft-contrib/5.2.1/tslint@5.12.1+typescript@3.7.5
-    dev: false
-    hasBin: true
-    id: registry.npmjs.org/@microsoft/rush-stack-compiler-3.7/0.2.5
-    resolution:
-      integrity: sha512-vuZ1LPMEtpIvkzJAPdxLkyibyejwv5OKijd/hp69wgRRhg9I/3IWvKnfN9tXiI7EXfpECTzvoNwKHAxbPmGyyg==
   /@microsoft/tsdoc-config/0.13.2:
     dependencies:
       '@microsoft/tsdoc': 0.12.18
@@ -668,10 +669,12 @@ packages:
       '@typescript-eslint/experimental-utils': /@typescript-eslint/experimental-utils/2.3.3/eslint@6.5.1
       '@typescript-eslint/parser': /@typescript-eslint/parser/2.3.3/eslint@6.5.1
       '@typescript-eslint/typescript-estree': 2.3.3
+      eslint: 6.5.1
       eslint-plugin-promise: 4.2.1
       eslint-plugin-react: /eslint-plugin-react/7.16.0/eslint@6.5.1
       eslint-plugin-security: 1.4.0
       eslint-plugin-tsdoc: 0.2.3
+      typescript: 3.7.5
     dev: false
     id: registry.npmjs.org/@rushstack/eslint-config/0.5.5
     peerDependencies:
@@ -1543,12 +1546,14 @@ packages:
       babel-core: ^6.0.0 || ^7.0.0-0
     resolution:
       integrity: sha512-lqKGG6LYXYu+DQh/slrQ8nxXQkEkhugdXsU6St7GmhVS7Ilc/22ArwqXNJrf0QaOBjZB0360qZMwXqDYQHXaew==
-  /babel-jest/25.1.0:
+  /babel-jest/25.1.0/@babel!core@7.8.7:
     dependencies:
-      babel-preset-jest: 25.1.0
+      '@babel/core': 7.8.7
+      babel-preset-jest: /babel-preset-jest/25.1.0/@babel!core@7.8.7
     dev: false
     engines:
       node: '>= 8.3'
+    id: registry.npmjs.org/babel-jest/25.1.0
     peerDependencies:
       '@babel/core': ^7.0.0
     resolution:
@@ -1606,13 +1611,15 @@ packages:
     dev: false
     resolution:
       integrity: sha1-jsegOhOPABoaj7HoETZSvxpV2kY=
-  /babel-preset-jest/25.1.0:
+  /babel-preset-jest/25.1.0/@babel!core@7.8.7:
     dependencies:
-      '@babel/plugin-syntax-bigint': 7.8.3
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3
+      '@babel/core': 7.8.7
+      '@babel/plugin-syntax-bigint': /@babel/plugin-syntax-bigint/7.8.3/@babel!core@7.8.7
+      '@babel/plugin-syntax-object-rest-spread': /@babel/plugin-syntax-object-rest-spread/7.8.3/@babel!core@7.8.7
     dev: false
     engines:
       node: '>= 8.3'
+    id: registry.npmjs.org/babel-preset-jest/25.1.0
     peerDependencies:
       '@babel/core': ^7.0.0
     resolution:
@@ -4816,7 +4823,7 @@ packages:
       '@babel/core': 7.8.7
       '@jest/test-sequencer': 25.1.0
       '@jest/types': 25.1.0
-      babel-jest: 25.1.0
+      babel-jest: /babel-jest/25.1.0/@babel!core@7.8.7
       chalk: 3.0.0
       glob: 7.1.6
       jest-environment-jsdom: 25.1.0
@@ -9371,7 +9378,7 @@ packages:
     dependencies:
       '@microsoft/node-library-build': 6.4.6
       '@microsoft/rush-stack-compiler-3.7': 0.2.5
-      '@rushstack/eslint-config': 0.5.5
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.5/typescript@3.7.5
       '@types/jest': 25.1.4
       '@types/node': 13.9.2
       colors: 1.4.0
@@ -9379,7 +9386,7 @@ packages:
       jest: 25.1.0
       jest-config: 25.1.0
       rimraf: 2.7.1
-      ts-jest: 25.2.1
+      ts-jest: /ts-jest/25.2.1/jest@25.1.0
       typescript: 3.7.5
     dev: false
     name: '@rush-temp/build-toolchain'
@@ -9391,8 +9398,9 @@ packages:
     dependencies:
       '@azure/event-hubs': 5.0.2
       '@azure/storage-blob': 12.1.1
+      '@azure/swagger-validation-common': 0.0.2
       '@microsoft/node-library-build': 6.4.6
-      '@microsoft/rush-stack-compiler-3.7': /@microsoft/rush-stack-compiler-3.7/0.2.5/typescript@3.7.5
+      '@microsoft/rush-stack-compiler-3.7': 0.2.5
       '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.5/typescript@3.7.5
       '@types/convict': 4.2.1
       '@types/jest': 25.1.4
@@ -9413,20 +9421,20 @@ packages:
     dev: false
     name: '@rush-temp/publish-pipeline-result'
     resolution:
-      integrity: sha512-srAQ4D6R19itzySlE0v8h+GcsuDyKTbaJyTfN7nVKRtYJJ/Ab3bo21KAR+DNDKbFS0aVWd1HH7ZBG+aPLzCnTg==
+      integrity: sha512-BXaLCG52K0Jey+jjo3XRD9YUkYWbMC4nE/cgV5SA3pwIXOySXBydOpCYYWT7sViYvSUUDl5P/AxAwUW0j1jUYQ==
       tarball: 'file:projects/publish-pipeline-result.tgz'
     version: 0.0.0
   'file:projects/swagger-validation-common.tgz':
     dependencies:
       '@microsoft/node-library-build': 6.4.6
       '@microsoft/rush-stack-compiler-3.7': 0.2.5
-      '@rushstack/eslint-config': 0.5.5
+      '@rushstack/eslint-config': /@rushstack/eslint-config/0.5.5/typescript@3.7.5
       '@types/jest': 25.1.4
       '@types/node': 13.9.2
       gulp: 4.0.2
       jest: 25.1.0
       jest-config: 25.1.0
-      ts-jest: 25.2.1
+      ts-jest: /ts-jest/25.2.1/jest@25.1.0
       typescript: 3.7.5
     dev: false
     name: '@rush-temp/swagger-validation-common'
@@ -9440,6 +9448,7 @@ shrinkwrapVersion: 3
 specifiers:
   '@azure/event-hubs': ~5.0.2
   '@azure/storage-blob': ~12.1.1
+  '@azure/swagger-validation-common': ^0.0.2
   '@microsoft/node-library-build': ~6.4.6
   '@microsoft/rush-stack-compiler-3.7': ~0.2.5
   '@rush-temp/build-toolchain': 'file:./projects/build-toolchain.tgz'
