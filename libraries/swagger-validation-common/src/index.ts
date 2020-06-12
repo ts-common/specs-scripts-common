@@ -17,3 +17,11 @@ export {
   MessageLine,
   MessageRecord,
 } from "./types/message";
+
+export {
+  targetHref,
+  blobHref,
+  getRelativeSwaggerPathToRepo,
+  getGithubStyleFilePath,
+  getTargetBranch,
+} from "./utils";
