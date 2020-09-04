@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Message should parse markdown message 1`] = `
+Object {
+  "extra": Object {
+    "role": "sdk automation",
+  },
+  "level": "Info",
+  "message": "<body><a href=\\"https://github.com\\"></body>",
+  "mode": "replace",
+  "time": "2012-04-23T18:25:43.511Z",
+  "type": "Markdown",
+}
+`;
+
 exports[`Message should parse raw message 1`] = `
 Object {
   "extra": Object {

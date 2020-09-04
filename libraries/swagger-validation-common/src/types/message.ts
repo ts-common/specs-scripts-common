@@ -6,8 +6,8 @@ export type JsonPath = {
 };
 
 export type MesssageContext = {
-  toolVersion: string; 
-}
+  toolVersion: string;
+};
 
 export type Extra = {
   [key: string]: any;
@@ -33,6 +33,11 @@ export type RawMessageRecord = BaseMessageRecord & {
   type: "Raw";
 };
 
-export type MessageRecord = ResultMessageRecord | RawMessageRecord 
+export type MarkdownMessageRecord = BaseMessageRecord & {
+  type: "Markdown";
+  mode: "replace" | "append";
+};
 
-export type MessageLine = MessageRecord | MessageRecord[]
+export type MessageRecord = ResultMessageRecord | RawMessageRecord | MarkdownMessageRecord;
+
+export type MessageLine = MessageRecord | MessageRecord[];

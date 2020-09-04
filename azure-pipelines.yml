@@ -1,12 +1,14 @@
+variables:
+  NodeVersion: 12.14.1
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-18.04"
 jobs:
 - job: PRBuild
   condition: succeeded()
-  strategy:
-    matrix:
-      'NodeJs 12':
-        NodeVersion: 12
   steps:
-  - checkout: self
-  - template: azure-pipelines/build.yaml
+    - task: NodeTool@0
+      displayName: 'Use Node $(NodeVersion)'
+      inputs:
+        versionSpec: "$(NodeVersion)"
+    - checkout: self
+    - template: azure-pipelines/build.yaml

@@ -1,0 +1,10 @@
+{
+  "type": "Markdown",
+  "level": "Info",
+  "mode": "replace",
+  "message": "<body><a href=\"https://github.com\"></body>",
+  "time": "2012-04-23T18:25:43.511Z",
+  "extra": {
+    "role": "sdk automation"
+  }
+}

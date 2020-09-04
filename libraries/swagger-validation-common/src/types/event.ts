@@ -1,3 +1,5 @@
+import { MessageLine } from "./message";
+
 export type PipelineResult = "success" | "failure" | "timed_out";
 
 export type PipelineTriggerSource = "github" | "openapi_hub";
@@ -12,7 +14,7 @@ export type PipelineRun = {
   logUrl: string; // the log url of the underlying azure pipeline
 };
 
-export type PipelineStatus = "queued" | "in_progress" | "completed";
+export type PipelineStatus = "queued" | "in_progress" | "completed" | "completed_with_result" | "cancelled";
 
 export type InProgressEvent = PipelineRun & {
   status: "in_progress";
@@ -24,4 +26,10 @@ export type CompletedEvent = PipelineRun & {
   logPath: string;
 };
 
-export type PipelineEvent = InProgressEvent | CompletedEvent;
+export type CompletedWithResultEvent = PipelineRun & {
+  status: "completed_with_result";
+  result: PipelineResult;
+  messages: MessageLine[]; 
+};
+
+export type PipelineEvent = InProgressEvent | CompletedEvent | CompletedWithResultEvent;

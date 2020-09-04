@@ -5,6 +5,7 @@ export {
   PipelineStatus,
   InProgressEvent,
   CompletedEvent,
+  CompletedWithResultEvent,
   PipelineEvent,
 } from "./types/event";
 export {
@@ -14,6 +15,7 @@ export {
   BaseMessageRecord,
   ResultMessageRecord,
   RawMessageRecord,
+  MarkdownMessageRecord,
   MessageLine,
   MessageRecord,
 } from "./types/message";
