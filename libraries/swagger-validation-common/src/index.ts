@@ -3,9 +3,11 @@ export {
   PipelineResult,
   PipelineRun,
   PipelineStatus,
+  QueuedEvent,
   InProgressEvent,
   CompletedEvent,
   CompletedWithResultEvent,
+  SkippedEvent,
   PipelineEvent,
 } from "./types/event";
 export {

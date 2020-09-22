@@ -1,12 +1,13 @@
 import { MessageLine } from "./message";
 
-export type PipelineResult = "success" | "failure" | "timed_out";
+export type PipelineResult = "success" | "failure" | "timed_out" | "skipped";
 
 export type PipelineTriggerSource = "github" | "openapi_hub";
 
 export type PipelineRun = {
   source: PipelineTriggerSource;
   unifiedPipelineTaskKey: string; // a unified pipeline task key, e.g. LintDiff, Semantic
+  unifiedPipelineSubTaskKey?: string; // sub task key, for dynamic generated sub task message
   unifiedPipelineBuildId: string; // a unique build id unified pipeline assigned for each completed pipeline build id
   pipelineBuildId: string; // the id of the record for the completed azure pipeline build.
   pipelineJobId: string; // the id of the record for the completed azure pipeline job.
@@ -14,7 +15,21 @@ export type PipelineRun = {
   logUrl: string; // the log url of the underlying azure pipeline
 };
 
-export type PipelineStatus = "queued" | "in_progress" | "completed" | "completed_with_result" | "cancelled";
+export type PipelineStatus =
+  | "queued"
+  | "in_progress"
+  | "completed"
+  | "skipped"
+  | "completed_with_result";
+
+export type QueuedEvent = PipelineRun & {
+  status: "queued";
+};
+
+export type SkippedEvent = PipelineRun & {
+  status: "skipped";
+  subTitle?: string;
+};
 
 export type InProgressEvent = PipelineRun & {
   status: "in_progress";
@@ -24,12 +39,19 @@ export type CompletedEvent = PipelineRun & {
   status: "completed";
   result: PipelineResult;
   logPath: string;
+  subTitle?: string;
 };
 
 export type CompletedWithResultEvent = PipelineRun & {
   status: "completed_with_result";
   result: PipelineResult;
-  messages: MessageLine[]; 
+  messages: MessageLine[];
+  subTitle?: string;
 };
 
-export type PipelineEvent = InProgressEvent | CompletedEvent | CompletedWithResultEvent;
+export type PipelineEvent =
+  | QueuedEvent
+  | InProgressEvent
+  | CompletedEvent
+  | SkippedEvent
+  | CompletedWithResultEvent;

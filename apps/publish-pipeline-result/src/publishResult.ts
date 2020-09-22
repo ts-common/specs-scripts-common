@@ -1,11 +1,18 @@
 #!/usr/bin/env node
-import { CompletedEvent, InProgressEvent, PipelineEvent, PipelineRun } from '@azure/swagger-validation-common';
+import {
+  CompletedEvent,
+  InProgressEvent,
+  QueuedEvent,
+  PipelineEvent,
+  PipelineRun,
+} from "@azure/swagger-validation-common";
 
 import { AzureBlobClient } from "./AzureBlobClient";
 import { configSchema, PublishResultConfig } from "./config";
 import { EventHubProducer } from "./EventHubClient";
 import { logger } from "./logger";
 import * as fs from "fs";
+import { SkippedEvent } from "@azure/swagger-validation-common/lib/types/event";
 
 class ResultPublisher {
   constructor(private config: PublishResultConfig) {}
@@ -64,21 +71,35 @@ const getAzurePipelineLog = (jobId: string, taskId?: string): string => {
     return `${jobLogUrl}&t=${taskId}`;
   }
   return jobLogUrl;
-}
+};
 
 export async function main(config: PublishResultConfig): Promise<void> {
   const resultPublisher = new ResultPublisher(config);
   const event = {
     source: config.source,
     unifiedPipelineTaskKey: config.unifiedPipelineTaskKey,
+    unifiedpipelineSubTaskKey: config.unifiedPipelineSubTaskKey,
     unifiedPipelineBuildId: config.unifiedPipelineBuildId,
     pipelineBuildId: config.pipelineBuildId,
     pipelineJobId: config.pipelineJobId,
     pipelineTaskId: config.pipelineTaskId,
-    logUrl: getAzurePipelineLog(config.pipelineJobId, config.pipelineTaskId)
+    logUrl: getAzurePipelineLog(config.pipelineJobId, config.pipelineTaskId),
   } as PipelineRun;
   const partitionKey = config.unifiedPipelineBuildId;
   switch (config.status) {
+    case "skipped":
+      const skippedEvent = {
+        ...event,
+        status: "skipped",
+        subTitle: config.subTitle,
+      } as SkippedEvent;
+      await resultPublisher.publishEvent(skippedEvent, partitionKey);
+    case "queued":
+      const queuedEvent = {
+        ...event,
+        status: "queued",
+      } as QueuedEvent;
+      await resultPublisher.publishEvent(queuedEvent, partitionKey);
     case "in_progress":
       const inprogressEvent = {
         ...event,
@@ -104,6 +125,7 @@ export async function main(config: PublishResultConfig): Promise<void> {
         ...event,
         status: "completed",
         result: config.result!,
+        subTitle: config.subTitle,
         logPath,
       };
       await resultPublisher.publishEvent(completionEvent, partitionKey);

@@ -1,4 +1,8 @@
-import { PipelineResult, PipelineStatus, PipelineTriggerSource } from "@azure/swagger-validation-common";
+import {
+  PipelineResult,
+  PipelineStatus,
+  PipelineTriggerSource,
+} from "@azure/swagger-validation-common";
 import convict from "convict";
 
 const statuses: ReadonlyArray<PipelineStatus> = ["in_progress", "completed"];
@@ -16,11 +20,13 @@ export interface PublishResultConfig {
   repoKey: string;
   unifiedPipelineBuildId: string;
   unifiedPipelineTaskKey: string;
+  unifiedPipelineSubTaskKey?: string;
   pipelineBuildId: string;
   pipelineJobId: string;
   pipelineTaskId: string;
   status: PipelineStatus;
   result?: PipelineResult;
+  subTitle?: string;
   logPath?: string;
   azureBlobSasUrl?: string;
   azureBlobContainerName?: string;
@@ -40,14 +46,28 @@ export const configSchema = convict<PublishResultConfig>({
     default: "",
     doc: "spec repo name, e.g. Azure/azure-rest-api-specs-only",
     arg: "repoKey",
-    env: "REPO_KEY"
+    env: "REPO_KEY",
   },
   unifiedPipelineTaskKey: {
     format: stringMustHaveLength,
     default: "",
-    doc: "pipeline job name",
+    doc: "pipeline task key",
     arg: "unifiedPipelineTaskKey",
-    env: "TASK_KEY"
+    env: "TASK_KEY",
+  },
+  unifiedPipelineSubTaskKey: {
+    format: String,
+    default: "",
+    doc: "pipeline sub task key",
+    arg: "unifiedPipelineSubTaskKey",
+    env: "SUB_TASK_KEY",
+  },
+  subTitle: {
+    format: String,
+    default: "",
+    doc: "pipeline sub title in comment report",
+    arg: "subTitle",
+    env: "SUB_TITLE",
   },
   unifiedPipelineBuildId: {
     format: stringMustHaveLength,
@@ -68,13 +88,13 @@ export const configSchema = convict<PublishResultConfig>({
     default: "",
     doc: "azure pipeline job id",
     arg: "pipelineJobId",
-    env: "SYSTEM_JOBID"
+    env: "SYSTEM_JOBID",
   },
   pipelineTaskId: {
     default: "",
     doc: "azure pipeline task id",
     arg: "pipelineTaskId",
-    env: "VALIDATION_TASKID"
+    env: "VALIDATION_TASKID",
   },
   status: {
     format: statuses,
