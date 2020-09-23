@@ -56,6 +56,7 @@ describe("publishResult", () => {
       unifiedPipelineSubTaskKey: "azure-sdk-for-python",
       unifiedPipelineBuildId: "12",
       status: "skipped",
+      subTitle: "why skipped",
       eventHubConnectionString: "dummy",
     };
     expect(pr.main(argv)).resolves.not.toThrow();

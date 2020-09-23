@@ -5,7 +5,12 @@ import {
 } from "@azure/swagger-validation-common";
 import convict from "convict";
 
-const statuses: ReadonlyArray<PipelineStatus> = ["in_progress", "completed"];
+const statuses: ReadonlyArray<PipelineStatus> = [
+  "in_progress",
+  "completed",
+  "queued",
+  "skipped",
+];
 const results: ReadonlyArray<PipelineResult> = ["success", "failure"];
 const sources: ReadonlyArray<PipelineTriggerSource> = ["github", "openapi_hub"];
 

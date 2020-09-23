@@ -4,6 +4,7 @@ import {
   InProgressEvent,
   QueuedEvent,
   PipelineEvent,
+  SkippedEvent,
   PipelineRun,
 } from "@azure/swagger-validation-common";
 
@@ -12,7 +13,6 @@ import { configSchema, PublishResultConfig } from "./config";
 import { EventHubProducer } from "./EventHubClient";
 import { logger } from "./logger";
 import * as fs from "fs";
-import { SkippedEvent } from "@azure/swagger-validation-common/lib/types/event";
 
 class ResultPublisher {
   constructor(private config: PublishResultConfig) {}
