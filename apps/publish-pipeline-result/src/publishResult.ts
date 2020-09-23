@@ -94,12 +94,14 @@ export async function main(config: PublishResultConfig): Promise<void> {
         subTitle: config.subTitle,
       } as SkippedEvent;
       await resultPublisher.publishEvent(skippedEvent, partitionKey);
+      break;
     case "queued":
       const queuedEvent = {
         ...event,
         status: "queued",
       } as QueuedEvent;
       await resultPublisher.publishEvent(queuedEvent, partitionKey);
+      break;
     case "in_progress":
       const inprogressEvent = {
         ...event,
