@@ -76,6 +76,7 @@ const getAzurePipelineLog = (jobId: string, taskId?: string): string => {
 export async function main(config: PublishResultConfig): Promise<void> {
   const resultPublisher = new ResultPublisher(config);
   const event = {
+    env: config.env,
     source: config.source,
     unifiedPipelineTaskKey: config.unifiedPipelineTaskKey,
     unifiedpipelineSubTaskKey: config.unifiedPipelineSubTaskKey,

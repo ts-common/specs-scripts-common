@@ -9,6 +9,7 @@ export {
   CompletedWithResultEvent,
   SkippedEvent,
   PipelineEvent,
+  Env,
 } from "./types/event";
 export {
   MessageLevel,
