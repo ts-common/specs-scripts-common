@@ -79,13 +79,16 @@ export async function main(config: PublishResultConfig): Promise<void> {
     env: config.env,
     source: config.source,
     unifiedPipelineTaskKey: config.unifiedPipelineTaskKey,
-    unifiedpipelineSubTaskKey: config.unifiedPipelineSubTaskKey,
+    unifiedPipelineSubTaskKey: config.unifiedPipelineSubTaskKey,
     unifiedPipelineBuildId: config.unifiedPipelineBuildId,
     pipelineBuildId: config.pipelineBuildId,
     pipelineJobId: config.pipelineJobId,
     pipelineTaskId: config.pipelineTaskId,
     logUrl: getAzurePipelineLog(config.pipelineJobId, config.pipelineTaskId),
   } as PipelineRun;
+  if (config.labels) {
+    event.labels = config.labels.split(",");
+  }
   const partitionKey = config.unifiedPipelineBuildId;
   switch (config.status) {
     case "skipped":

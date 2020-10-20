@@ -97,6 +97,7 @@ describe("publishResult", () => {
       unifiedPipelineTaskKey: "LintDiff",
       unifiedPipelineBuildId: "12",
       status: "in_progress",
+      labels: "test",
       eventHubConnectionString: "dummy",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
@@ -122,6 +123,7 @@ describe("publishResult", () => {
       azureBlobContainerName: "containername",
       azureBlobSasUrl: "dummy",
       eventHubConnectionString: "dummy",
+      labels: "labela,labelb",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
     expect(sendBatch).toHaveBeenCalled();

@@ -1,6 +1,6 @@
 import { MessageLine } from "./message";
 
-export type PipelineResult = "success" | "failure" | "timed_out" | "skipped";
+export type PipelineResult = "success" | "failure" | "timed_out";
 
 export type Env = "prod" | "ppe";
 
@@ -16,6 +16,7 @@ export type PipelineRun = {
   pipelineJobId: string; // the id of the record for the completed azure pipeline job.
   pipelineTaskId: string; // the id of the record for the completed azure pipeline task.
   logUrl: string; // the log url of the underlying azure pipeline
+  labels?: string[]; // github label list which unified pipeline will add
 };
 
 export type PipelineStatus =

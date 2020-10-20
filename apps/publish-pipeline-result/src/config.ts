@@ -39,6 +39,7 @@ export interface PublishResultConfig {
   azureBlobSasUrl?: string;
   azureBlobContainerName?: string;
   eventHubConnectionString: string;
+  labels?: string;
 }
 
 export const configSchema = convict<PublishResultConfig>({
@@ -148,5 +149,12 @@ export const configSchema = convict<PublishResultConfig>({
     doc: "event hub connection string for sending pipeline progress events",
     env: "EVENTHUB_CONNECTION_STRING",
     sensitive: true,
+  },
+  labels: {
+    format: String,
+    default: "",
+    doc: "comma seperated github labels",
+    arg: "labels",
+    env: "LABELS",
   },
 });
