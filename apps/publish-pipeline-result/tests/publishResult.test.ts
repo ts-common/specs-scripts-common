@@ -48,6 +48,7 @@ describe("publishResult", () => {
     process.env.BUILD_BUILDID = "123";
     const argv: PublishResultConfig = {
       source: "github",
+      env: "prod",
       repoKey: "testorg/testspecrepo",
       pipelineBuildId: "1",
       pipelineJobId: "1",
@@ -68,6 +69,7 @@ describe("publishResult", () => {
     process.env.BUILD_BUILDID = "123";
     const argv: PublishResultConfig = {
       source: "github",
+      env: "ppe",
       repoKey: "testorg/testspecrepo",
       pipelineBuildId: "1",
       pipelineJobId: "1",
@@ -86,6 +88,7 @@ describe("publishResult", () => {
     process.env.SYSTEM_TEAMPROJECT = "teamproject";
     process.env.BUILD_BUILDID = "123";
     const argv: PublishResultConfig = {
+      env: "prod",
       source: "github",
       repoKey: "testorg/testspecrepo",
       pipelineBuildId: "1",
@@ -94,6 +97,7 @@ describe("publishResult", () => {
       unifiedPipelineTaskKey: "LintDiff",
       unifiedPipelineBuildId: "12",
       status: "in_progress",
+      labels: "test",
       eventHubConnectionString: "dummy",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
@@ -119,6 +123,7 @@ describe("publishResult", () => {
       azureBlobContainerName: "containername",
       azureBlobSasUrl: "dummy",
       eventHubConnectionString: "dummy",
+      labels: "labela,labelb",
     };
     expect(pr.main(argv)).resolves.not.toThrow();
     expect(sendBatch).toHaveBeenCalled();

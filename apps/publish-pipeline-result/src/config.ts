@@ -2,6 +2,7 @@ import {
   PipelineResult,
   PipelineStatus,
   PipelineTriggerSource,
+  Env,
 } from "@azure/swagger-validation-common";
 import convict from "convict";
 
@@ -12,6 +13,7 @@ const statuses: ReadonlyArray<PipelineStatus> = [
   "skipped",
 ];
 const results: ReadonlyArray<PipelineResult> = ["success", "failure"];
+const envs: ReadonlyArray<Env> = ["ppe", "prod"];
 const sources: ReadonlyArray<PipelineTriggerSource> = ["github", "openapi_hub"];
 
 const stringMustHaveLength = (value: string) => {
@@ -26,6 +28,7 @@ export interface PublishResultConfig {
   unifiedPipelineBuildId: string;
   unifiedPipelineTaskKey: string;
   unifiedPipelineSubTaskKey?: string;
+  env?: Env;
   pipelineBuildId: string;
   pipelineJobId: string;
   pipelineTaskId: string;
@@ -36,9 +39,17 @@ export interface PublishResultConfig {
   azureBlobSasUrl?: string;
   azureBlobContainerName?: string;
   eventHubConnectionString: string;
+  labels?: string;
 }
 
 export const configSchema = convict<PublishResultConfig>({
+  env: {
+    format: envs,
+    default: "prod",
+    doc: "which env the build is in",
+    arg: "env",
+    env: "ENV",
+  },
   source: {
     format: sources,
     default: "github",
@@ -138,5 +149,12 @@ export const configSchema = convict<PublishResultConfig>({
     doc: "event hub connection string for sending pipeline progress events",
     env: "EVENTHUB_CONNECTION_STRING",
     sensitive: true,
+  },
+  labels: {
+    format: String,
+    default: "",
+    doc: "comma seperated github labels",
+    arg: "labels",
+    env: "LABELS",
   },
 });
