@@ -1,6 +1,6 @@
 {
   "name": "@azure/publish-pipeline-result",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An tool for publish pipeline result",
   "license": "MIT",
   "scripts": {
@@ -13,7 +13,7 @@
     "my-bulk-command": "node_modules/.bin/my-bulk-command"
   },
   "dependencies": {
-    "@azure/swagger-validation-common": "^0.1.0",
+    "@azure/swagger-validation-common": "^0.1.1",
     "whatwg-fetch": "^3.0.0",
     "@azure/event-hubs": "~5.0.2",
     "@azure/storage-blob": "~12.1.1",
