@@ -30,3 +30,9 @@ export {
   getGithubStyleFilePath,
   getTargetBranch,
 } from "./utils";
+
+export {
+  sendSuccess,
+  sendFailure,
+  sendLabels,
+} from "./pipeline";

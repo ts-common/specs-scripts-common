@@ -1,6 +1,6 @@
 {
   "name": "@azure/swagger-validation-common",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Common lib for swagger validation",
   "license": "MIT",
   "main": "lib/index.js",
